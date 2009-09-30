@@ -2,7 +2,8 @@
 
 %hr
 - form_for [:admin,@user,@faculty] do |f|
-  =f.select(:section_id, @section)
+  <strong>Section: </strong>
+  =f.select(:section_id, @sections)
   %hr
   =fg_submit_button "add"
   =fg_cancel_button "cancel"

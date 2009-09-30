@@ -59,9 +59,13 @@
               .span-15.last
                 =yield:sidebar
             #main.span-70.prepend-1.append-1.last
+              - flash.each do |name,msg|
+                %div(class="#{name} prepend-top")=msg
               =yield :layout
           -else
             #main.span-88.prepend-1.append-1.last
+              - flash.each do |name,msg|
+                %div(class="#{name} prepend-top")=msg
               =yield :layout
     .span-96.prepend-top.last
       #footer

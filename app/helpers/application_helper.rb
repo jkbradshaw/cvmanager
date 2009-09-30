@@ -4,7 +4,9 @@ module ApplicationHelper
   def html_authors_for(paper,faculty)
     cv_authors = faculty ? faculty.authors : []
     output =  []
-    paper.authors.each do |p| 
+    authorships = paper.authorships.sort {|x,y| x.author_position <=> y.author_position}
+    authors = authorships.collect{|x| Author.find(x.author_id)}
+    authors.each do |p| 
       if cv_authors.include?(p)
         output << '<strong>' + p.first_name + ' ' + p.last_name + '</strong>'
       else
@@ -16,6 +18,7 @@ module ApplicationHelper
   
   def html_pubmed_authors_for(pubmed_authors)
     output = []
+    pubmed_authors.sort {|x,y| x.author_position <=> y.author_position}
     pubmed_authors.each do |a|
       output << "#{a[:first_name]} #{a[:last_name]}"
     end
