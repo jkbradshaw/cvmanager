@@ -1,4 +1,4 @@
-This file is auto-generated from the current state of the database. Instead of editing this file, 
+# This file is auto-generated from the current state of the database. Instead of editing this file, 
 # please use the migrations feature of Active Record to incrementally modify your database, and
 # then regenerate this schema definition.
 #
@@ -9,7 +9,7 @@ This file is auto-generated from the current state of the database. Instead of e
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090927175257) do
+ActiveRecord::Schema.define(:version => 20090930013610) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -124,6 +124,7 @@ ActiveRecord::Schema.define(:version => 20090927175257) do
     t.integer  "clinical_rvu"
     t.integer  "medstudent_teaching"
     t.integer  "resident_teaching"
+    t.integer  "citizenship"
   end
 
   create_table "ignored_authors", :force => true do |t|

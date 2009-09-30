@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_filter :check_for_cancel
   
   access_control do
+    allow all, :to=>[:new,:create]
     allow logged_in
   end
   
@@ -25,7 +26,6 @@ class UsersController < ApplicationController
 
   def edit
     @user = current_user
-    #render :layout=>'user'
   end
 
   def update
@@ -40,11 +40,11 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    render :layout=>'application'
   end
   
   def show
     @user = current_user
-    #render :layout=>'user'
   end
   
   private

@@ -21,52 +21,43 @@ class Faculty < ActiveRecord::Base
     #longevity:   up to 3pts, 0.1pts per year, round partial years up
     #citizenship: 3pts (fudge factor) 
     
-    arvu = {}
-    
-    #clinical
-    #@all_faculty = Faculty.find(:all, :order=>'clinical_rvu DESC')
-    #@section = section.faculty.find(:all, :order=>'clinical_rvu DESC')
-    arvu[:clinical] = 0
-    
-    #education
-    arvu[:res_education]
-    #academic
-    
-    #admin
-    arvu[:admin] = admin
-    
-    #longevity
-    
-    #citizenship
-    arvu[:citizenship] = citizenship
-
-    arvu
+    #add up points from other methods
   end
   
   def academic_points
     start_date = Date.civil(Time.now.year,1,1)
-    papers1 = cv.first_authorship(start_date).count * 0.3
-    papers2 = cv.second_authorship_with_trainee(start_date).count * 0.3
-    papers3 = 
+    all_papers = cv.papers.pmed_date_greater_than(Date.civil(Time.now.year,1,1)).all
+    papers1 = cv.first_authorship_papers(start_date)
+    papers2 = cv.second_authorship_papers_with_trainee(start_date)
+    papers_other = all_papers - papers1 - papers2
+    
+    books = cv.books_and_chapters(Time.now.year)
+    
+    (papers1.count * 0.3) +  (papers2.count * 0.2) + (papers_other.count * 0.1) + (books.count * 0.05)
   end
   
   def clinical_points
+    0
   end
   
   def res_education_points
+    0
   end
   
   def ms_education_points
+    0
   end
   
   def admin_points
-    admin
+    leadership
   end
   
   def longevity_points
+    0
   end
   
   def citizenship_points
+    citizenship
   end
   
   

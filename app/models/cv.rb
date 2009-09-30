@@ -19,7 +19,7 @@ class Cv < ActiveRecord::Base
   before_save :make_public_address
   after_save :set_ownership
   
-  def first_authorship(date)
+  def first_authorship_papers(date)
     paps = []
     authors.each do |author|
       author.papers.each do |p|
@@ -30,7 +30,7 @@ class Cv < ActiveRecord::Base
     paps
   end
   
-  def second_authorship_with_trainee(date)
+  def second_authorship_papers_with_trainee(date)
     paps = []
     authors.each do |author|
       author.papers.each do |p|
@@ -71,10 +71,14 @@ class Cv < ActiveRecord::Base
     chapter_list
   end
   
-  def books_and_chapters
+  def books_and_chapters(year = nil)
     list = []
     authors.each do |a|
-      list << a.books
+      if year
+        list << a.books.year_is(year).all
+      else
+        list << a.books
+      end
     end
     list.uniq!
     list.flatten!
