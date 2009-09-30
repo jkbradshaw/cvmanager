@@ -1,0 +1,12 @@
+- content_for :actions do
+  =circle_plus_left_fg_button_to "add new", new_cv_certification_path(@cv)
+  
+- for cert in @certifications
+  .prepend-1
+    = "#{cert.andand.name} (#{cert.andand.date_received})"
+    .links.clearfix
+      =link_to 'edit', edit_cv_certification_path(@cv, cert)
+      |
+      =link_to "remove", delete_cv_award_path(@cv,cert)
+    %hr
+  

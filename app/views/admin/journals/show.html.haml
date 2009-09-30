@@ -1,0 +1,18 @@
+%span.title= @journal.andand.long_title
+%br
+.prepend-1
+  ="(#{@journal.andand.short_title})"
+  %br
+  Impact factor = 
+  ="#{@journal.andand.impact}"
+  %br
+  ISSN = 
+  ="#{@journal.andand.issn}"
+  
+%hr
+%h3 Papers
+-for paper in @papers
+  =render :partial => 'papers/paper', :object=>paper
+
+%hr
+= arrowreturnthick_1_w_left_fg_button_to "return to list", admin_journals_path

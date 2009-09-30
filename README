@@ -1,0 +1,17 @@
+CV Manager
+
+Written to keep track of CVs and CME hours for a couple of academic radiology departments. It also functions to calculate an 'academic RVU'. The calculation is done in Faculty::x_points and currently uses Duke's incentive scoring system. If you want to do it differently you'll have to change the various Faculty points methods.
+
+BROWSER SUPPORT:
+Tested in firefox 3, safari 4, ie6 and i7, but looks best in firefox and safari as they support css3 rounded corners. If rounded corners are important in IE, then you could include a javascript plugin like dd_roundies that would use VML do draw rounded corners in IE.
+
+REQUIREMENTS:
+Rails > 2.2.4
+    
+INSTALLATION:
+run rake gems:install to install the required gems. You may have to build native extensions for libxml -- I haven't tried this on windows.
+
+For initial setup, create a user. The first user will automatically be set as an administrator
+In the admin section you will have to populate CME categories table and the Sections table
+
+The journals table contains a field for an impact factor. To load the impact factors as determined by Paul Nagy, run rake db:seed

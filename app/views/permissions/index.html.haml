@@ -1,0 +1,11 @@
+-content_for :actions do
+  =circle_plus_left_fg_button_to "add new", new_user_permission_path
+  
+%h2 Users who can manage your CV
+-for user in @cv_managers
+  %p
+    =user.name
+    .links.clearfix
+      =link_to 'remove permissions', '#'
+  
+%hr

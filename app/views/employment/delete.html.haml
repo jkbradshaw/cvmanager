@@ -1,0 +1,6 @@
+%h2 Are you sure you want to delete?
+- form_tag cv_employment_instance_path(@cv,@employment), :method=>:delete do
+  %h4= "Delete this entry: #{@employment.institution.andand.name}, #{@employment.institution.andand.location} (#{@employment.andand.end_date})"
+  %hr
+  =fg_submit_button "Yes"
+  =fg_cancel_button "No"

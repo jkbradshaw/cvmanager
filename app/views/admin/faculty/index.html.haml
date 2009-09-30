@@ -1,0 +1,17 @@
+%h1.content-title Faculty Members
+%table
+  -for member in @faculty_members
+    %tr
+      %td=h member.name
+      %td=h member.section.name
+      %td=h member.start_date
+      %td=h member.clinical_rvu
+      %td=h member.resident_teaching
+      %td=h member.medstudent_teaching
+      %td=h member.leadership
+      %td
+        .links.clearfix
+          =link_to 'edit', edit_admin_faculty_instance_path(member)
+          |
+          =link_to 'remove from faculty', delete_admin_faculty_instance_path(member)
+

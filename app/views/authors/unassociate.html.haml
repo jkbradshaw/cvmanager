@@ -1,0 +1,5 @@
+%h1 Unassociate this author with your CV?
+=render :partial=>'author'
+- form_tag cv_author_path(@cv,@author), :html=>{:method=>:delete} do 
+  = fg_submit_button "Yes"
+  = fg_cancel_button "No"

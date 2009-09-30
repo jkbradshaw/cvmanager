@@ -1,0 +1,15 @@
+
+- unless @cv.nil? and @author.nil?
+  %h2= @author.name
+  %hr
+  - unless @author.papers.empty?
+    %h3 Papers
+    - @author.papers.each do |p|
+      = render :partial=> 'papers/paper', :object=>p
+      %hr
+  - unless @author.books.empty?
+    %h3 Books and chapters
+    - @author.books.each do |b|
+      = render :partial=> 'books/book', :object=>b
+      %hr
+

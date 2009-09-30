@@ -1,0 +1,13 @@
+%h2= "Co-authors on #{Time.now.year} papers"
+
+%table
+  %tr
+    %th
+    %th Name
+  -for author in @coauthors
+    %tr
+      %td= 'trainee' if author.trainee
+      %td= author.name
+%hr
+-content_for :actions do
+  =pencil_left_fg_button_to "edit", edit_cv_coauthors_path(@cv)

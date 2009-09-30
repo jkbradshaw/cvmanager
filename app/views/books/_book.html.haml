@@ -1,0 +1,9 @@
+.publication
+  -if book.is_chapter
+    %span.title= h "#{book.chapter_title} "
+    ="in #{book.book_title}"
+  -else
+    %span.title= h book.book_title
+  %br
+  %span.authors= html_authors_for(book,@cv)
+

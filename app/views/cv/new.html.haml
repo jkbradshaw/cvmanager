@@ -1,0 +1,6 @@
+%h1.content-title Create CV
+- form_tag cv_path do
+  = "Start a CV for #{@cv.first_name} #{@cv.last_name}?"
+  %hr
+  =fg_submit_button "Submit"
+  =fg_cancel_button "Cancel"

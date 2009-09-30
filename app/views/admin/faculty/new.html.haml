@@ -1,0 +1,8 @@
+%h1.content-title= "Add #{@user.name} to faculty?"
+
+%hr
+- form_for [:admin,@user,@faculty] do |f|
+  =f.select(:section_id, @section)
+  %hr
+  =fg_submit_button "add"
+  =fg_cancel_button "cancel"

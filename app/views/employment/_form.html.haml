@@ -1,0 +1,33 @@
+- form_for @employment, :url=>@employment.new_record? ? cv_employment_path(@cv) : cv_employment_instance_path(@cv, @employment) do |f|
+  = f.error_messages 
+
+  - f.fields_for @institution_fields do |i|
+    %fieldset
+      %legend Institution
+      %p
+        Name: 
+        %br
+        = i.text_field :name
+      %p
+        Location:
+        %br
+        = i.text_field :location
+      %p
+        Country:
+        %br
+        = i.text_field :country
+    %p
+      =f.label :start_date 
+      %br
+      = f.date_select :start_date
+    %p
+      =f.label :end_date 
+      %br
+      = f.date_select :end_date
+    %p
+      Description:
+      %br
+      = f.text_area :description
+
+  =fg_submit_button "Submit"
+  =fg_cancel_button "Cancel"

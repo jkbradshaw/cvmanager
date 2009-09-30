@@ -1,0 +1,31 @@
+- content_for :context do
+  %span.context=@cv.andand.name || current_user.name
+  
+
+- content_for :navigation do
+  %ul
+    = navigation_link 'CV', current_user.cv ? cv_instance_path(current_user.cv.id) : new_cv_instance_path, !@cv.nil?
+    = navigation_link 'CME hours', cmes_path, controller.class == CmesController
+    = navigation_link 'calculate aRVU', '#' if current_user.faculty
+
+    
+- content_for :left_sidebar do
+  -if @cv
+    %ul
+      %li= link_to 'CV', '#'
+      %li= link_to "Contact information", '#'
+      %li= link_to "Papers", cv_papers_path(@cv)
+      %li= link_to "Books", cv_books_path(@cv)
+      %li= link_to "Education", cv_education_path(@cv)
+      %li= link_to "Training", cv_training_path(@cv)
+      %li= link_to "Awards", cv_awards_path(@cv)
+      %li= link_to "Certifications", cv_certifications_path(@cv)
+    %hr
+    %ul
+      %li= link_to "Authors", cv_authors_path(@cv)
+      %li= link_to 'Co-authors', '#'
+    %hr
+    %ul
+      %li= link_to 'Make PDF', '#'
+
+=render :file=>'layouts/application'

@@ -1,0 +1,18 @@
+%h2 Users
+
+-for user in @users
+  ="#{user.name} "
+  ="- site administrator" if user.has_role?(:admin)
+  .links.clearfix
+    =link_to 'view cv', cv_instance_path(user.cv)
+    -unless user == current_user
+      |
+      =link_to 'manage permissions', permissions_admin_user_path(user) 
+    - unless user.faculty
+      |
+      =link_to 'add to faculty', new_admin_user_faculty_path(user)
+    
+  %br
+  %hr
+  
+=circle_plus_left_fg_button_to "add new user", new_admin_user_path

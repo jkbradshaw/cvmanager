@@ -1,0 +1,9 @@
+%h2 Are you sure you want to delete?
+- form_for [:admin,@section], :html=>{:method=>:delete} do |f|
+  %h4= "Section:  #{ @section.name}"
+  = "#{@section.faculty.count} faculty will have their section set to nothing, but won't be deleted" if @section.faculty.count > 0
+  %br
+  %hr
+  %p
+    = fg_submit_button "Yes"
+    = fg_cancel_button "No"

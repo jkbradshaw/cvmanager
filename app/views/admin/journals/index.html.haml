@@ -1,0 +1,27 @@
+%h1.content-title Journals
+
+%table
+  %tr
+    %th Impact factor
+    %th Short name
+    %th Papers
+    %th
+  - for journal in @journals
+    %tr
+      %td= journal.andand.impact
+      %td= journal.andand.short_title
+      %td= journal.andand.papers.count
+      %td
+        = link_to 'see papers', admin_journal_path(journal)
+        |
+        = link_to 'edit', edit_admin_journal_path(journal)
+        - if journal.andand.papers.count == 0
+          |
+          = link_to 'delete', delete_admin_journal_path(journal)
+          
+%hr
+
+
+%p
+  = circle_plus_left_fg_button_to "Add a new journal", new_admin_journal_path 
+

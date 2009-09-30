@@ -1,0 +1,25 @@
+-form_for :presentation, @presentation, :url => @presentation.new_record? ? cv_presentations_path(@cv) : cv_presentation_path(@cv,@presentation) do |f|
+  =f.error_messages
+  %p
+    =f.label :title
+    %br
+    =f.text_field :title
+  %p
+    =f.label :conference
+    %br
+    =f.text_field :conference
+  %p
+    =f.label :location
+    %br
+    =f.text_field :location
+  %p
+    =f.label :given_at
+    %br
+    =f.date_select :given_at
+  %p
+    =f.label "Author list (ie: 'George Washington, David W Smith')"
+    %br
+    =f.text_field :author_list
+  %hr
+  =fg_submit_button "submit"
+  =fg_cancel_button "cancel"

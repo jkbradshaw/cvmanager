@@ -1,0 +1,26 @@
+#assigned-authors.append-bottom
+  %h2.content-title= @cv ? "Assigned Authors" : "Authors in database"
+  - @authors.each do |author|
+    =h "#{author.first_name} #{author.last_name}"
+    .links.clearfix
+      - if @cv
+        = link_to "unassociate", unassociate_cv_author_path(@cv,author)
+        |
+      = link_to "view", @cv ? cv_author_path(@cv, author) : author_path(author)
+    %hr
+    
+- unless @possible_authors.nil? or @possible_authors.empty?
+  #possible-authors.append-bottom
+    %h2.content-title Possible Authors
+    - @possible_authors.each do |author|
+      = "#{author.first_name} #{author.last_name}"
+      .links.clearfix
+        = link_to "associate", associate_cv_author_path(@cv,author)
+        | 
+        = link_to "view", cv_author_path(@cv, author)
+        | 
+        = link_to "ignore", ignore_cv_author_path(@cv, author)
+      %hr
+
+
+

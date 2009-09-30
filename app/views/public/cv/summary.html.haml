@@ -1,0 +1,20 @@
+%h2.center Duke University Department of Radiology
+%hr
+
+%h3="#{User.count} users with a total of #{@cme_hours} CME hours"
+%br
+%h3="#{Paper.count} Papers, #{Book.count} Books and chapters in the database"
+%br
+%hr
+
+%br
+%h3 Recent Papers
+-for paper in @papers
+  =render :partial=>'papers/paper', :object=>paper
+  %hr
+  
+%h3 Recent Book chapters
+-for book in @books
+  =render :partial=>'books/book',:object=>book
+  %hr
+  

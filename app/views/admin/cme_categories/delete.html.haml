@@ -1,0 +1,6 @@
+%h1 Are you sure?
+-form_tag admin_cme_category_path(@category), :method=>:delete
+  = "Delete #{@category.category}?"
+  %hr
+  =fg_submit_button "submit"
+  =fg_cancel_button 'cancel'

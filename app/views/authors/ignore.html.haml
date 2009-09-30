@@ -1,0 +1,6 @@
+%h1 Ignore this author?
+%p This will remove this author from your possible author list.
+=render :partial=>'author'
+- form_tag remove_cv_author_path(@cv,@author) do 
+  = fg_submit_button "Yes"
+  = fg_cancel_button "No"

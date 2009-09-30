@@ -1,0 +1,11 @@
+- form_for [:admin,@section] do |f|
+  =f.error_messages
+  %p
+    =f.label :name
+    %br
+    =f.text_field :name
+    
+  %p
+    =fg_submit_button "Submit"
+    =fg_cancel_button "Cancel"
+    

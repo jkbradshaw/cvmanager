@@ -1,0 +1,18 @@
+- form_for [@cv, @award] do |f|
+  =f.error_messages
+  %p
+    =f.label :name
+    %br
+    =f.text_field :name
+  %p
+    =f.label :year
+    %br
+    =f.text_field :year
+  %p
+    =f.label :description
+    %br
+    =f.text_area :description
+  %p
+    =fg_submit_button "Submit"
+    =fg_cancel_button "Cancel"
+    

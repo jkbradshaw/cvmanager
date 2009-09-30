@@ -1,0 +1,6 @@
+%h1.content-title Are you sure?
+="Remove #{@faculty.name} from the faculty?"
+-form_tag admin_faculty_instance_path(@faculty), :method=>:delete do |f|
+  %hr
+  =fg_submit_button "yes"
+  =fg_cancel_button "no"

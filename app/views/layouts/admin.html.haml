@@ -1,0 +1,16 @@
+- content_for :sidebar do
+  %ul
+    %li= link_to "CME categories", admin_cme_categories_path
+    %li= link_to "Journals", admin_journals_path
+    %li= link_to 'Sections', admin_sections_path
+  %hr
+  %ul
+    %li= link_to 'Users', admin_users_path
+    %li= link_to "Faculty", admin_faculty_path
+  %hr
+  %ul
+    %li= link_to "CME report", '#'
+      
+  
+=render :file=>'layouts/application'
+  

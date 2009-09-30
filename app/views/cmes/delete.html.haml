@@ -1,0 +1,8 @@
+%h1.content-title Are you sure you want to delete?
+
+-form_tag :cme, :url=>cme_path(@cme), :method=>:delete do |f|
+  ="Delete this CME: #{@cme.hours} hours from #{@cme.source} in #{@cme.category}"
+  %hr
+  =fg_submit_button "Delete"
+  =fg_cancel_button "Cancel"
+  

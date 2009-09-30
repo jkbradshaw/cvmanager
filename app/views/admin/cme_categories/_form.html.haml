@@ -1,0 +1,10 @@
+- form_for [:admin,@category] do |f|
+  =f.error_messages
+  %p
+    =f.label :category
+    %br
+    =f.text_field :category
+  %hr
+  %p
+    =fg_submit_button "submit"
+    =fg_cancel_button 'cancel'

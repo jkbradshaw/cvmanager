@@ -1,0 +1,21 @@
+- form_for [:admin,@journal] do |f|
+  = f.error_messages
+  %p
+    Title:
+    =f.text_field :long_title
+  %p
+    Short title:
+    =f.text_field :short_title
+  %p
+    Impact factor:
+    =f.text_field :impact
+  %p
+    ISSN: 
+    =f.text_field :issn
+  %p
+    NLM unique ID:
+    =f.text_field :nlmuid
+  %p
+    =fg_submit_button 'submit'
+    =fg_cancel_button 'cancel'
+    

@@ -1,0 +1,36 @@
+- form_for [@cv,@training], :url=>@form_path do |f|
+  = f.error_messages 
+  %p
+    Level (Internship, Residency, etc): 
+    %br
+    = f.text_field :level
+  %p
+    Specialty:
+    %br
+    = f.text_field :specialty
+  %p
+    Year completed:
+    %br
+    = f.text_field :year
+  %p
+    Description:
+    %br
+    = f.text_area :description
+  - f.fields_for @institution_fields do |i|
+    %fieldset
+      %legend Institution
+      %p
+        Name: 
+        %br
+        = i.text_field :name
+      %p
+        Location:
+        %br
+        = i.text_field :location
+      %p
+        Country:
+        %br
+        = i.text_field :country
+
+  =fg_submit_button "Submit"
+  =fg_cancel_button "Cancel"

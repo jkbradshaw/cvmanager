@@ -1,0 +1,34 @@
+- form_for @education, :url=>@form_path do |f|
+  = f.error_messages 
+  %p
+    Degree: 
+    %br
+    = f.text_field :degree
+  %p
+    Year:
+    %br
+    = f.text_field :year
+  %p
+    Description:
+    %br
+    = f.text_area :description
+  - f.fields_for @institution_fields do |i|
+    %fieldset
+      %legend Institution
+      %p
+        Name: 
+        %br
+        = i.text_field :name
+      %p
+        Location:
+        %br
+        = i.text_field :location
+      %p
+        Country:
+        %br
+        = i.text_field :country
+
+  %p
+    =fg_submit_button "Submit"
+    =fg_cancel_button "Cancel"
+  

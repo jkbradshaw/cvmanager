@@ -1,0 +1,10 @@
+-form_tag user_permissions_path do
+
+  -for user in @matches
+    %p
+      =check_box_tag "managers[#{user.id}]"
+      ="<strong>#{user.name}<strong>"
+  %hr
+  =fg_submit_button "add checked as managers"
+  =fg_cancel_button "return to list"
+    

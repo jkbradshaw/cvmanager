@@ -1,0 +1,22 @@
+- form_for @cme do |f|
+  =f.error_messages
+  %p
+    =f.label :source
+    %br
+    =f.text_field :source
+  %p
+    =f.label :hours
+    %br
+    =f.text_field :hours
+  %p
+    =f.label :category
+    %br
+    =f.select(:cme_category_id, @categories)
+  %p
+    =f.label :received_date
+    %br
+    =f.date_select :received_date
+  %hr
+  %p
+    =fg_submit_button "submit"
+    =fg_cancel_button "cancel"

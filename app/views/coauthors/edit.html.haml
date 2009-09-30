@@ -1,0 +1,14 @@
+%h2= "Co-authors on #{Time.now.year} papers"
+-form_tag cv_coauthors_path(@cv), :method=>:put do
+  %table
+    %tr
+      %th Trainee?
+      %th Name
+    -for author in @coauthors
+      %tr
+        %td= check_box_tag("coauthor[#{author.id}]", author.trainee ? 1 : 0, author.trainee ? true : false)
+        %td= author.name
+  %hr
+  =fg_submit_button "save changes"
+  =fg_cancel_button "cancel"
+ 

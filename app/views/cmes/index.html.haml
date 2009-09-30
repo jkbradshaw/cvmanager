@@ -1,0 +1,14 @@
+%h1.content-title CME Hours
+%table
+  - for cme in @cmes
+    %tr
+      %td= cme.category
+      %td= cme.hours
+      %td= cme.source
+      %td= cme.received_date
+      %td
+        = link_to 'edit', edit_cme_path(cme)
+        |
+        = link_to 'delete', delete_cme_path(cme)
+        
+=circle_plus_left_fg_button_to "add new CME", new_cme_path

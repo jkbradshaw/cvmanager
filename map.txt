@@ -1,0 +1,40 @@
+users
+    can be
+        admin
+        focused admin
+        manager of a cv
+        owner of a cv
+        all three
+
+admin
+    flag a faculty as part of the incentive program
+    add users
+    modify any cv?
+    faculty teaching score - resident and medical student
+    --other things for aRVU calculation
+    clinical RVU
+    see cme for faculty
+    see aRVU for faculty/section
+    assign permissions for managing
+    edit journal impact factors
+    
+    
+limited/focused admin
+    modify/edit something like teaching score
+    
+guest
+    can see public cvs at public/name
+    can see department summary (root page)
+    can't add anything
+    can register to create a cv
+        will have to get verified by admin?
+        
+manager of/owner of cv
+    same as guest
+    but can edit/manage own cv or cvs of managed faculty
+    see arvu
+    see arvu rank?
+    manage cme
+    owner can give permission for managing
+    can generate pdf of cv
+    

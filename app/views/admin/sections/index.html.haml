@@ -1,0 +1,14 @@
+%h1.content-title Sections
+
+- for section in @sections
+  ="#{section.name} (#{section.faculty.count} faculty members)"
+  %br
+  .links.clearfix
+    = link_to 'view faculty', admin_section_path(section) if section.faculty.count > 0
+    |
+    = link_to 'edit', edit_admin_section_path(section)
+    |
+    = link_to 'delete', delete_admin_section_path(section)
+  %hr
+    
+%p= circle_plus_left_fg_button_to "Create new section", new_admin_section_path

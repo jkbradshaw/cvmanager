@@ -1,0 +1,4 @@
+%h1.content-title Delete Contact Information?
+-form_tag :address, @address, :url=> cv_address_path(@cv,@address), :method=>:delete
+  =fg_submit_button "delete"
+  =fg_cancel_button "cancel"

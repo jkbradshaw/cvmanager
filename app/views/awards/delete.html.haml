@@ -1,0 +1,7 @@
+%h2 Are you sure you want to delete?
+- form_for [@cv, @award], :html=>{:method=>:delete} do |f|
+  %h4= "Delete this award: #{@award.andand.name}<br/>"
+  %hr
+  %p
+    =fg_submit_button "Yes"
+    =fg_cancel_button "No"

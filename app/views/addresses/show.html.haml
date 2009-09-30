@@ -1,0 +1,19 @@
+-content_for :actions do
+  =contact_left_fg_button_to "Edit", edit_cv_address_path(@cv)
+
+%h3 Address
+="#{@address.address1}<br/>" unless @address.address1.empty?
+="#{@address.address2}<br/>" unless @address.address2.empty?
+="#{@address.address3}<br/>" unless @address.address3.empty?
+="#{@address.city}, #{@address.state}  #{@address.zip}"
+%br
+=@address.country
+%br
+%hr
+%br
+%h3 Contact Information
+="Email: #{@address.email}"
+%br
+="Phone: #{@address.phone}"
+%br
+%hr

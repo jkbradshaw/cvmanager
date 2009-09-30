@@ -1,0 +1,7 @@
+%h1 Add a new paper from pubmed
+
+- form_tag preview_new_cv_paper_path(@cv) do
+  = text_field :params, 'pmid'
+  %br
+  = fg_submit_button 'Query Pubmed'
+

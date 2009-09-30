@@ -1,0 +1,11 @@
+%h2="Permissions for #{@user.name}"
+%hr
+-form_tag update_permissions_admin_user_path(@user) do
+  -for role in @site_permissions
+    =check_box_tag("roles[#{role}]",@user.has_role?(role) ? 1 : 0, @user.has_role?(role) ? true :false)
+    =role
+    %br
+  %br
+  %hr
+  =fg_submit_button "yes"
+  =fg_cancel_button "no"

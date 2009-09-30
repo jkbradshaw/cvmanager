@@ -1,0 +1,7 @@
+%h2 Are you sure you want to delete?
+- form_for @paper, :html=>{:method=>:delete} do |f|
+  = @paper.title
+  %br
+  %p
+    = fb_submit_button "Yes"
+    = fb_cancel_button "Cancel"

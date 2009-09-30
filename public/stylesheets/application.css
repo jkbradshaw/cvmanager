@@ -1,0 +1,100 @@
+/*
+dkblue: 001a57
+gray background: ebecec
+brownish orange: a37300
+
+second scheme
+283232 -- dk
+41463A -- medium
+666446 -- middle
+EDD2A0 -- light
+9B3205 -- red accent
+*/
+
+body {  }
+
+a {color: #9b3205; text-decoration:none;}
+a:hover {text-decoration:underline; }
+
+.container { background-color: #EDD2A0;}
+
+#banner { background-color: #283232; color: #ebecec; }
+#banner h2 {color: #ebecec; font-size:1.4em; margin:0; display:inline;}
+#banner.links {float:right;}
+#banner ul { display:inline;}
+#banner li {list-style-type:none; float:left; margin: 0 0 0.5em 0; padding:0 1em; border-left: 1px solid #aaaaaa;}
+#banner li.first {border:none;}
+#banner a {text-decoration: none; color: #ebecec;}
+
+#context-wrapper { background-color: #666446; padding: 0.5em 0 0 0; }
+#context ul { display:inline; padding:0;}
+#context li { list-style-type:none; float:left; margin: .1em .7em 0 .3em; padding: .3em 1em .3em 1em; background-color: #41463A; }
+#context a { text-decoration:none; color: white; }
+#context li.active {background-color: #EDD2A0; }
+#context .active a {color: black;}
+
+#login {padding: 1em 0 0 0;}
+
+#sub-context ul {display:inline;}
+#sub-context li {list-style-type:none; float:left; margin: 0.3em 0 0 0; padding: 0 1em; border-left: 1px solid black; }
+#sub-context li.first {border:none;}
+#sub-context a {text-decoration: none; }
+#sub-context li.active {background-color: white;}
+
+#content {background-color: white;}
+
+#tabs ul {display:inline;}
+#tabs li {list-style-type:none; float:left; margin: 0.2em 0.3em 0 0.3em; padding: 0.3em 0.5em 0.3em 0.5em; background-color: #666446;}
+#tabs a {text-decoration: none; color:white; }
+#tabs li.active {background-color: white;}
+#tabs .active a {color: #9B3205;}
+#tabs .ui-widget {border-bottom: none;}
+
+#sidebar ul {margin:0;}
+#sidebar li {list-style-type: none; padding: 0.5em 0 0.5em 0.5em;}
+#sidebar a {text-decoration:none;}
+#sidebar li:hover {background-color: #EDD2A0;}
+
+
+#footer {color: #dddddd; text-align: center; font-size: 0.7em; background-color: #283232;}
+
+.publication span.title {
+	font-size: 130%;
+	font-style: italic;
+}
+
+#cv #name {font-size:2em; text-decoration:bold; border-bottom: 1px solid black;}
+#cv #address {display:inline; float:left;}
+#cv #contact {display:inline; float:right;}
+#cv h2 {margin: 1em 0 0 0; font-size: 1.7em;}
+#cv h5 {margin:0;}
+
+.links {float:right;}
+
+.center {text-align: center;}
+
+.fg-button { outline: 0; margin:0 4px 0 0; padding: .4em 1em; text-decoration:none !important; cursor:pointer; position: relative; text-align: center; zoom: 1; }
+.fg-button .ui-icon { position: absolute; top: 50%; margin-top: -8px; left: 50%; margin-left: -8px; }
+	
+a.fg-button { float:left; }
+	
+/* remove extra button width in IE */
+button.fg-button { width:auto; overflow:visible; }
+
+.fg-button-icon-left { padding-left: 2.1em; }
+.fg-button-icon-right { padding-right: 2.1em; }
+.fg-button-icon-left .ui-icon { right: auto; left: .2em; margin-left: 0; }
+.fg-button-icon-right .ui-icon { left: auto; right: .2em; margin-left: 0; }
+
+.fg-button-icon-solo { display:block; width:8px; text-indent: -9999px; }	 /* solo icon buttons must have block properties for the text-indent to work */	
+
+.fg-buttonset { float:left; }
+.fg-buttonset .fg-button { float: left; }
+.fg-buttonset-single .fg-button, 
+.fg-buttonset-multi .fg-button { margin-right: -1px;}
+
+.fg-toolbar { padding: .5em; margin: 0;  }
+.fg-toolbar .fg-buttonset { margin-right:1.5em; padding-left: 1px; }
+.fg-toolbar .fg-button { font-size: 1em;  }
+
+

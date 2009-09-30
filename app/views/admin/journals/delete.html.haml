@@ -1,0 +1,13 @@
+- if @journal.papers.count == 0
+  %h2 Are you sure you want to delete?
+  - form_for [:admin,@journal], :html=>{:method=>:delete} do |f|
+    %h4= @journal.long_title
+    %br
+    %p
+      = fb_submit_button "Yes"
+      = fb_cancel_button "Cancel"
+- else
+  %h2 Can't delete
+  %h4= "Can't delete #{@journal.short_title} with #{@journal.papers.count} papers in the database"
+  %hr
+  = arrowreturnthick_1_w_left_fg_button_to "Back to list", admin_journals_path

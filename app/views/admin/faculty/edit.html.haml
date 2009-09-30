@@ -1,0 +1,19 @@
+%h1.content-title Edit Faculty
+- form_for @faculty, :url=>admin_faculty_instance_path(@faculty) do |form|
+  =form.error_messages
+  %p
+    =form.label :section
+    %br
+    =form.select :section_id, @sections
+  %p
+    =form.label :start_date
+    %br
+    =form.date_select :start_date
+  %p
+    =form.label :points_for_leadership
+    %br
+    =form.text_field :leadership
+  %hr
+  %p
+    =fg_submit_button "submit"
+    =fg_cancel_button "cancel"

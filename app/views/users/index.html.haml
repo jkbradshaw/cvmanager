@@ -1,0 +1,7 @@
+%h1.content-title Users
+
+- for user in @users
+  =h user.username
+  %hr
+  
+= circle_plus_left_fg_button_to "Add new user", new_user_path
