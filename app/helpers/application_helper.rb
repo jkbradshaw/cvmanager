@@ -18,7 +18,7 @@ module ApplicationHelper
   
   def html_pubmed_authors_for(pubmed_authors)
     output = []
-    pubmed_authors.sort {|x,y| x.author_position <=> y.author_position}
+    pubmed_authors.sort {|x,y| x[:author_position] <=> y[:author_position]}
     pubmed_authors.each do |a|
       output << "#{a[:first_name]} #{a[:last_name]}"
     end

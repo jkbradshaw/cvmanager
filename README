@@ -7,6 +7,8 @@ Tested in firefox 3, safari 4, ie6 and i7, but looks best in firefox and safari 
 
 REQUIREMENTS:
 Rails > 2.3.4
+several gems which are specified in config/environment
+fastercsv gem
     
 INSTALLATION:
 run rake gems:install to install the required gems. You may have to build native extensions for libxml -- I haven't tried this on windows.
