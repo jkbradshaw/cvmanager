@@ -1,0 +1,7 @@
+%h2 Are you sure you want to delete?
+
+-form_tag cv_grant_path(@cv,@grant), :method=>:delete do
+  =render :partial=>'grant', :object=>@grant
+  %hr
+  =fg_submit_button 'yes'
+  =fg_cancel_button 'no'

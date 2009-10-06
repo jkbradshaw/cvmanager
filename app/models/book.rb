@@ -44,7 +44,7 @@ class Book < ActiveRecord::Base
     end
   
     def book_or_chapter
-      self.is_chapter = true unless chapter_title.empty?
+      self.is_chapter = true unless chapter_title.nil? or chapter_title.empty?
     end
     
     def year_must_be_reasonable

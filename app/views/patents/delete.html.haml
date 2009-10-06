@@ -1,0 +1,7 @@
+%h2 Are you sure you want to delete?
+
+-form_tag cv_patent_path(@cv,@patent), :method=>:delete do
+  =render :partial=>'patent', :object=>@patent
+  %hr
+  =fg_submit_button 'yes'
+  =fg_cancel_button 'no'

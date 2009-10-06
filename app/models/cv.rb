@@ -12,6 +12,8 @@ class Cv < ActiveRecord::Base
   has_many :employment
   has_many :training
   has_one :address
+  has_many :grants
+  has_many :patents
   belongs_to :user
   
   delegate :last_name, :first_name, :name, :to=>:user
@@ -19,22 +21,30 @@ class Cv < ActiveRecord::Base
   before_save :make_public_address
   after_save :set_ownership
   
-  def first_authorship_papers(date)
+  def first_authorship_papers(date=nil)
     paps = []
     authors.each do |author|
       author.papers.each do |p|
-        paps << p if p.author_position(author) == 1 and p.pmed_date > date
+        if date
+          paps << p if p.author_position(author) == 1 and p.pmed_date > date
+        else
+          paps << p if p.author_position(author) == 1
+        end
       end
     end
     paps.flatten!
     paps
   end
   
-  def second_authorship_papers_with_trainee(date)
+  def second_authorship_papers_with_trainee(date=nil)
     paps = []
     authors.each do |author|
       author.papers.each do |p|
-        paps << p if p.author_position(author) == 2 and p.author_at_position(2).trainee and p.pmed_date > date
+        if date
+          paps << p if p.author_position(author) == 2 and p.author_at_position(1).trainee and p.pmed_date > date
+        else
+          paps << p if p.author_position(author) == 2 and p.author_at_position(1).trainee
+        end
       end
     end
     paps.flatten!

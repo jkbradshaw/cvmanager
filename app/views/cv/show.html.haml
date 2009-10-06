@@ -29,7 +29,7 @@
         =render :partial=>'education/education',:object=>education
   -if @cv.papers.count > 0
     #papers.span-68.last
-      %h2 Papers
+      %h2 Articles
       -for paper in @cv.papers
         .prepend-1
           =render :partial=>'papers/paper', :object=>paper

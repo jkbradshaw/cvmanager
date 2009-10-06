@@ -106,13 +106,78 @@ class Test::Unit::TestCase
     
     section ||= klass.make
     cv ||= section.cv
+    owner = cv.user
+    not_owner = User.make(:username=>"not#{owner.username}")
+    manager = User.make(:username=>"manager#{owner.username}")
+    manager.has_role!(:manager,cv)
+    admin = User.make(:username=>"admin#{owner.username}")
+    admin.has_role!(:admin)
     
-    self.cvm_gets(%w[index], {:cv_instance_id => cv.id})
-    self.cvm_gets(%w[new delete edit], {:cv_instance_id=>cv.id, :id=>section.id} )
-    self.cvm_create(klass,controller,{:cv_instance_id=>cv.id})
-    self.cvm_update(klass,controller,{:cv_instance_id=>cv.id, :id=>section.id})
-    self.cvm_destroy(klass,controller,{:cv_instance_id=>cv.id, :id=>section.id}, section.id)
-    self.cvm_edit(klass,controller,{:cv_instance_id=>cv.id, :id=>section.id})    
+    context "not logged in" do
+      context "get index" do
+        should "redirect to root" do
+          get :index, {:cv_instance_id=>cv.id}
+          assert_redirected_to root_url
+        end
+      end
+    end
+
+    context "logged in but no role for cv" do
+      setup do
+        activate_authlogic
+        UserSession.create(not_owner)      
+      end
+
+      context "get index" do
+        should "redirect to root" do
+          get :index,  {:cv_instance_id=>cv.id}
+          assert_redirected_to root_url
+        end
+      end
+    end
+    
+    context "logged in, owner of cv" do
+      setup do
+        activate_authlogic
+        UserSession.create(owner)
+      end
+    
+      self.cvm_gets(%w[index], {:cv_instance_id => cv.id})
+      self.cvm_gets(%w[new delete edit], {:cv_instance_id=>cv.id, :id=>section.id} )
+      self.cvm_create(klass,controller,{:cv_instance_id=>cv.id})
+      self.cvm_update(klass,controller,{:cv_instance_id=>cv.id, :id=>section.id})
+      self.cvm_destroy(klass,controller,{:cv_instance_id=>cv.id, :id=>section.id}, section.id)
+      self.cvm_edit(klass,controller,{:cv_instance_id=>cv.id, :id=>section.id})    
+    end
+    
+    context "logged in, manager of cv" do
+      setup do
+        activate_authlogic
+        UserSession.create(manager)
+      end
+    
+      self.cvm_gets(%w[index], {:cv_instance_id => cv.id})
+      self.cvm_gets(%w[new delete edit], {:cv_instance_id=>cv.id, :id=>section.id} )
+      self.cvm_create(klass,controller,{:cv_instance_id=>cv.id})
+      self.cvm_update(klass,controller,{:cv_instance_id=>cv.id, :id=>section.id})
+      self.cvm_destroy(klass,controller,{:cv_instance_id=>cv.id, :id=>section.id}, section.id)
+      self.cvm_edit(klass,controller,{:cv_instance_id=>cv.id, :id=>section.id})    
+    end
+    
+    context "logged in as admin" do
+      setup do
+        activate_authlogic
+        UserSession.create(admin)
+      end
+    
+      self.cvm_gets(%w[index], {:cv_instance_id => cv.id})
+      self.cvm_gets(%w[new delete edit], {:cv_instance_id=>cv.id, :id=>section.id} )
+      self.cvm_create(klass,controller,{:cv_instance_id=>cv.id})
+      self.cvm_update(klass,controller,{:cv_instance_id=>cv.id, :id=>section.id})
+      self.cvm_destroy(klass,controller,{:cv_instance_id=>cv.id, :id=>section.id}, section.id)
+      self.cvm_edit(klass,controller,{:cv_instance_id=>cv.id, :id=>section.id})    
+    end
+    
   end
   
 end

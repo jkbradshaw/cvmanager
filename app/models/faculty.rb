@@ -26,38 +26,77 @@ class Faculty < ActiveRecord::Base
   
   def academic_points
     start_date = Date.civil(Time.now.year,1,1)
-    all_papers = cv.papers.pmed_date_greater_than(Date.civil(Time.now.year,1,1)).all
+    all_papers = cv.papers.reject {|x| x.pmed_date < (Date.civil(Time.now.year,1,1)) }
     papers1 = cv.first_authorship_papers(start_date)
     papers2 = cv.second_authorship_papers_with_trainee(start_date)
     papers_other = all_papers - papers1 - papers2
     
     books = cv.books_and_chapters(Time.now.year)
     
-    (papers1.count * 0.3) +  (papers2.count * 0.2) + (papers_other.count * 0.1) + (books.count * 0.05)
+    points = (papers1.count * 0.3) +  (papers2.count * 0.2) + (papers_other.count * 0.1) + (books.count * 0.05)
+    points = 3 if points > 3
+    points
   end
   
-  def clinical_points
-    0
+  def all_clinical_points
+    all_faculty = Faculty.ascend_by_clinical_rvu.all
+    count = all_faculty.count
+    points = 4
+    [0.9,0.8,0.7,0.6,0.5,0.4,0.3,0.2,0.1].each do |q|
+      points = q * 4 if clinical_rvu <= all_faculty[(count*q + 0.5).to_i].clinical_rvu
+    end
+    points
+  end
+  
+  def section_clinical_points
+    section_faculty = Faculty.section_id_is(self.section_id).ascend_by_clinical_rvu.all
+    points = 2
+    [0.9,0.8,0.7,0.6,0.5,0.4,0.3,0.2,0.1].each do |q|
+      points = q * 2 if clinical_rvu <= section_faculty[(count*q + 0.5).to_i].clinical_rvu
+    end
+    points
   end
   
   def res_education_points
-    0
+    all_faculty = Faculty.ascend_by_resident_teaching.all
+    count = all_faculty.count
+    re_points = 2.5
+    [0.9,0.8,0.7, 0.6,0.5, 0.4,0.3, 0.2,0.1].each do |q|
+      re_points = q * 2.5 if resident_teaching <= all_faculty[(count*q + 0.5).to_i].resident_teaching
+    end
+    re_points
   end
   
   def ms_education_points
-    0
+    all_faculty = Faculty.ascend_by_medstudent_teaching.all
+    median = all_faculty[all_faculty.count/2].medstudent_teaching
+    if medstudent_teaching >= median
+      0.5
+    else
+      0
+    end
   end
   
   def admin_points
-    leadership
+    if leadership > 3
+      3
+    else
+      leadership
+    end    
   end
   
   def longevity_points
-    0
+    points = ( ( (Date.civil(Time.now.year,12,31) - start_date).to_f/365 ) + 0.9 ).to_i * 0.1
+    points = 3 if points > 3
+    points
   end
   
   def citizenship_points
-    citizenship
+    if citizenship > 3
+      3
+    else
+      citizenship
+    end
   end
   
   

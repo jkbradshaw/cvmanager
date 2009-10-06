@@ -1,0 +1,22 @@
+-form_for [@cv,@patent] do |f|
+  %p
+    =f.error_messages
+  %p
+    =f.label :title
+    %br
+    =f.text_field :title
+  %p
+    =f.label :year
+    %br
+    =f.text_field :year
+  %p
+    =f.label "Patent id number"
+    %br
+    =f.text_field :number
+  %p
+    =f.label :description
+    %br
+    =f.text_area :description
+  %hr
+  =fg_submit_button "submit"
+  =fg_cancel_button "cancel"

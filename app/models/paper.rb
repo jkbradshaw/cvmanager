@@ -11,7 +11,11 @@ class Paper < ActiveRecord::Base
   before_destroy :destroy_empty_authors
   
   def author_position(author)
-    authorships.find_by_author(author).author_position
+    authorships.find_by_author_id(author.id).author_position
+  end
+  
+  def author_at_position(position)
+    authorships.find_by_author_position(position).author
   end
   
   def published_in?(year)
@@ -22,7 +26,6 @@ class Paper < ActiveRecord::Base
   def author_array=(auths)
     if self.new_record?
       auths.each do |key,a|
-        #auth = Author.find_by_last_name_and_first_name(a[:last_name].upcase, a[:first_name].upcase) || Author.new(:last_name => a[:last_name], :first_name => a[:first_name])
         self.authorships.build({:author=>Author.find_or_create_by_first_and_last_name(a), :author_position=> a[:author_position].to_i})
       end
     end

@@ -7,20 +7,24 @@ Sham.define do
   specialty {Faker::Lorem.words(2).join(' ')}
   last_name  { Faker::Name.last_name }
   first_name  { Faker::Name.first_name }
-  username {Faker::Name.first_name+Faker::Name.last_name}
+  username { |u| "user#{u}"}
   per_name {Faker::Name.name}
   nlmuid { (1..10).map { ('0'..'9').to_a.rand } }
-  pmid { |x| "1687634#{x}" }
+  pmid { (16000..16100).to_a.rand.to_s }
   issn { ((1..4).map {('0'..'9').to_a.rand}).to_s + "-" + ((1..4).map {('0'..'9').to_a.rand}).to_s }
   year { (1950..(Time.now.year)).to_a.rand.to_i }
+  start_date { Date.civil((1990..2009).to_a.rand, 6,1) }
   pages { (100..150).to_a.rand.to_s + '-' + (151..200).to_a.rand.to_s }
   publisher {Faker::Company.name}
   description {Faker::Lorem.paragraph}
   date { Date.civil( (2000..2006).to_a.rand, (1..12).to_a.rand, (1..30).to_a.rand )  }
   later_date { Date.civil( (2007..2009).to_a.rand, (1..12).to_a.rand, (1..30).to_a.rand )  }
+  current_date { Date.civil(Time.now.year, (1..12).to_a.rand, (1..30).to_a.rand )  }
   location {Faker::Address.city}
   email {Faker::Internet.email}
   hours { (1..4).to_a.rand }
+  number { (1000..1100).to_a.rand.to_s }
+
 end
 
 Address.blueprint do
@@ -38,7 +42,6 @@ end
 Author.blueprint do
   first_name
   last_name
-  cv
 end
 
 Authorship.blueprint do
@@ -73,10 +76,21 @@ Book.blueprint do
   is_chapter true
 end
 
-Book.blueprint(:chapter) do 
+Book.blueprint(:book) do 
   book_title {Sham.title}
   chapter_title nil
   is_chapter false
+end
+
+Book.blueprint(:current_chapter) do
+  year { Time.now.year }
+end
+
+Book.blueprint(:current_book) do
+  book_title {Sham.title}
+  chapter_title nil
+  is_chapter false
+  year { Time.now.year }
 end
 
 Certification.blueprint do
@@ -118,6 +132,22 @@ end
 
 Faculty.blueprint do
   section
+  user
+  resident_teaching { (0..1000).to_a.rand.to_i }
+  medstudent_teaching { (0..10).to_a.rand.to_i }
+  citizenship { (0..30).to_a.rand.to_i/10 }
+  leadership { (0..30).to_a.rand.to_i/10 }
+  clinical_rvu { (0..20000).to_a.rand.to_i }
+  start_date
+end
+
+Grant.blueprint do
+  cv
+  start_date {Sham.date}
+  end_date {Sham.later_date}
+  description
+  awarded_by {Faker::Company.name}
+  number
 end
 
 Institution.blueprint do
@@ -160,6 +190,19 @@ Paper.blueprint do
   journal_year {Sham.year}
   journal_pages {Sham.pages}
   journal
+  pmed_date {Sham.date}
+end
+
+Paper.blueprint(:current) do
+  pmed_date {Sham.current_date}
+end
+
+Patent.blueprint do
+  cv
+  title
+  year
+  description
+  number
 end
 
 Presentation.blueprint do
@@ -188,7 +231,7 @@ end
 User.blueprint do
   last_name {Faker::Name.last_name}
   first_name {Faker::Name.first_name}
-  username {Faker::Name.last_name}
+  username 
   email {Faker::Internet.email}
   password {"testpassword"}
   password_confirmation {password}

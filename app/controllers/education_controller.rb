@@ -12,7 +12,6 @@ class EducationController < CvBaseController
   
   def new
     @education = @cv.education.new
-    @form_path = cv_education_path(@cv, @education)
     @institution_fields = :institution_attributes
   end
   
@@ -23,13 +22,12 @@ class EducationController < CvBaseController
       redirect_to cv_education_path(@cv)
     else
       flash[:error] = "Some error here"
-      redirect_to new_cv_education_instance_path(@cv)
+      render :action=>'new'
     end
   end
   
   def edit
     @education = @cv.education.find(params[:id])
-    @form_path = cv_education_instance_path(@cv, @education)
     @institution_fields = :institution
   end
   
@@ -39,7 +37,7 @@ class EducationController < CvBaseController
       flash[:notice] = "Successfully updated education entry."
       redirect_to cv_education_path(@cv)
     else
-      redirect_to edit_cv_education_instance_path(@cv, @education)
+      render :action=>'edit'
     end
   end
   

@@ -3,7 +3,7 @@
   -if @cv
     %ul
       = tab_to "Contact", @cv.address ? cv_address_path(@cv) : new_cv_address_path(@cv), controller.class == AddressesController
-      = tab_to "Papers", cv_papers_path(@cv), controller.class == PapersController
+      = tab_to "Articles", cv_papers_path(@cv), controller.class == PapersController
       = tab_to "Books", cv_books_path(@cv), controller.class == BooksController
       = tab_to "Education", cv_education_path(@cv), controller.class == EducationController
       = tab_to "Training", cv_training_path(@cv), controller.class == TrainingController
@@ -11,7 +11,8 @@
       = tab_to "Certifications", cv_certifications_path(@cv), controller.class == CertificationsController
       = tab_to "Awards", cv_awards_path(@cv), controller.class == AwardsController
       = tab_to "Presentations", cv_presentations_path(@cv), controller.class == PresentationsController
-      = tab_to "Patents", '#'
+      = tab_to "Patents", cv_patents_path(@cv), controller.class == PatentsController
+      = tab_to "Grants", cv_grants_path(@cv), controller.class == GrantsController
 
 - content_for :sidebar do
   %ul

@@ -22,7 +22,7 @@ class BooksController < CvBaseController
       redirect_to cv_books_path(@cv) 
     else
       flash[:error] = "Problem adding to the database"
-      redirect_to  new_cv_book_path(@cv)
+      render :action=>'new'
     end
   end
   
@@ -37,7 +37,7 @@ class BooksController < CvBaseController
       redirect_to  cv_books_path(@cv)
     else
       flash[:error] = "Problem updating"
-      redirect_to edit_cv_book_path(@cv, @book) 
+      render :action=>'edit'
     end  
   end
   

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090930013610) do
+ActiveRecord::Schema.define(:version => 20091005212646) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -127,6 +127,22 @@ ActiveRecord::Schema.define(:version => 20090930013610) do
     t.integer  "citizenship"
   end
 
+  create_table "grants", :force => true do |t|
+    t.date     "start_date"
+    t.date     "end_date"
+    t.integer  "direct_award"
+    t.integer  "indirect_award"
+    t.integer  "status_id",      :default => 1
+    t.text     "awarded_by"
+    t.text     "description"
+    t.string   "role"
+    t.integer  "number"
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "cv_id"
+  end
+
   create_table "ignored_authors", :force => true do |t|
     t.integer  "author_id"
     t.integer  "cv_id"
@@ -176,6 +192,16 @@ ActiveRecord::Schema.define(:version => 20090930013610) do
     t.datetime "updated_at"
     t.string   "pub_model"
     t.integer  "journal_id"
+  end
+
+  create_table "patents", :force => true do |t|
+    t.integer  "year"
+    t.text     "description"
+    t.string   "number"
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "cv_id"
   end
 
   create_table "presentations", :force => true do |t|

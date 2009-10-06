@@ -1,13 +1,13 @@
 - form_for (@user, :url=> user_path) do |f|
   =f.error_messages
   %p
-    =f.label :last_name
-    %br
-    =f.text_field :last_name
-  %p
     =f.label :first_name
     %br
     =f.text_field :first_name
+  %p
+    =f.label :last_name
+    %br
+    =f.text_field :last_name
   %p
     =f.label :username
     %br

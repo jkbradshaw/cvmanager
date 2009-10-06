@@ -1,0 +1,46 @@
+-form_for [@cv,@grant] do |f|
+  =f.error_messages
+  %p
+    =f.label :title
+    %br
+    =f.text_field :title
+  %p
+    =f.label :start_date
+    %br
+    =f.date_select :start_date
+  %p
+    =f.label :end_date
+    %br
+    =f.date_select :end_date
+  %p
+    =f.label :status
+    %br
+    =f.select :status_id, %w[active completed]
+  %p
+    <strong>Awarding agency:</strong>
+    %br
+    =f.text_field :awarded_by
+  %p
+    <strong>Grant number:</strong>
+    %br
+    =f.text_field :number
+  %p
+    =f.label :role
+    %br
+    =f.text_field :role
+  %p
+    <strong>Direct awarded amount:</strong>
+    %br
+    =f.text_field :direct_award
+  %p
+    <strong>Indirect awarded amount:</strong>
+    %br
+    =f.text_field :indirect_award
+  %p
+    =f.label :description
+    %br
+    =f.text_area :description
+  %hr
+  =fg_submit_button 'submit'
+  =fg_cancel_button 'cancel'
+

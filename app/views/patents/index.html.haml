@@ -1,0 +1,10 @@
+-for patent in @patents
+  =render :partial=>'patent', :object=>patent
+  .links.clearfix
+    =link_to 'edit', edit_cv_patent_path(@cv,patent)
+    |
+    =link_to 'remove', delete_cv_patent_path(@cv, patent)
+
+  
+-content_for :actions do
+  =circle_plus_left_fg_button_to "add new", new_cv_patent_path(@cv)

@@ -1,4 +1,4 @@
-- form_for @education, :url=>@form_path do |f|
+- form_for @education, :url=> @education.new_record? ? cv_education_path(@cv) : cv_education_instance_path(@cv, @education) do |f|
   = f.error_messages 
   %p
     Degree: 

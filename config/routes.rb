@@ -2,7 +2,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :cv, :singular=> :cv_instance do |c|
     c.resource :coauthors, :name_prefix => 'cv_', :only=>[:show, :edit, :update]
-    c.resources :papers, :new => {:new => :any, :preview => :post }, :name_prefix => 'cv_', :except => [:edit, :update], :member => { :delete => :get } 
+    c.resources :papers, :as=> 'articles', :new => {:new => :any, :preview => :post }, :name_prefix => 'cv_', :except => [:edit, :update], :member => { :delete => :get } 
     c.resources :books, :name_prefix => 'cv_', :member => { :delete => :get } 
     c.resources :authors, :name_prefix => 'cv_', :except => [:add, :edit, :create, :new], :member => {:unassociate => :get, :associate=>:get, :ignore=>:get, :remove=>:post}
     c.resources :education, :singular=> :education_instance, :name_prefix => 'cv_', :member => { :delete => :get } 
@@ -12,6 +12,8 @@ ActionController::Routing::Routes.draw do |map|
     c.resource :address, :name_prefix => 'cv_', :member=>{:delete=>:get}
     c.resources :employment, :singular=> :employment_instance, :name_prefix=>'cv_', :member=> {:delete => :get}
     c.resources :presentations, :name_prefix=>'cv_', :member=>{:delete=>:get}
+    c.resources :grants, :name_prefix=>'cv_', :member=>{:delete=>:get}
+    c.resources :patents, :name_prefix=>'cv_', :member=>{:delete=>:get}
   end
   
   map.resource :user, :except=>:index do |user|

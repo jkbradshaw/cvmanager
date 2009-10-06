@@ -45,7 +45,6 @@ class PapersController < CvBaseController
     else
       if x = Paper.get_pubmed_xml(pmid)
         @paper = Paper.pubmed_xml_to_hash(x)
-        flash[:error] = "The paper: <br/><em>#{@paper[:title]}</em><br/> is already in the database" if Paper.find_by_pmid(@paper[:pmid])
       else
         flash[:error] = "No paper with pubmed id of #{pmid}"
       end
