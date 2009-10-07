@@ -44,7 +44,7 @@
             %li.first= link_to 'CV',  cv_instance_path(user_context.cv)
             %li= link_to 'CME', cmes_path
             -if user_context.faculty
-              %li= link_to 'aRVU', '#'
+              %li= link_to 'aRVU', arvu_path
     .span-90.prepend-top.prepend-3.append-3.last
       #tabs
         =yield :tabs

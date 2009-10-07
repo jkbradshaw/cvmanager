@@ -22,6 +22,8 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :cmes, :member => { :delete => :get }
   
+  map.arvu 'arvu', :controller=> 'arvu', :action=>'show'
+  
   map.namespace :admin do |a|
     a.root :controller=>'admin', :action=>'index'
     a.resources :sections, :member=>{:delete=>:get}

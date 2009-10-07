@@ -4,7 +4,7 @@ class PresentationsController < CvBaseController
   before_filter :load_presentation, :only=>[:edit,:update,:delete,:destroy]
   
   def index
-    @presentations = Presentation.all
+    @presentations = @cv.presentations
   end
   
   def new

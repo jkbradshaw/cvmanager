@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(:version => 20091005212646) do
     t.string   "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "cv_id"
+    t.integer  "cv_id", :unique=>true
   end
 
   create_table "authors", :force => true do |t|
@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(:version => 20091005212646) do
   end
 
   create_table "cv", :force => true do |t|
-    t.integer  "user_id"
+    t.integer  "user_id", :unique=>true
     t.string   "public_address"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -180,7 +180,7 @@ ActiveRecord::Schema.define(:version => 20091005212646) do
 
   create_table "papers", :force => true do |t|
     t.string   "title"
-    t.string   "pmid"
+    t.string   "pmid", :unique => true
     t.string   "journal_volume"
     t.string   "journal_issue"
     t.integer  "journal_year"

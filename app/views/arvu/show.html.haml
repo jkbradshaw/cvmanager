@@ -1,0 +1,68 @@
+%h2= @faculty.name
+%hr
+Faculty Statistics:
+%table
+  %tr
+    %td Total faculty members:
+    %td= @faculty_count
+  %tr
+    %td Total section members:
+    %td= @section_count
+    
+Personal Statistics for #{@year}:
+%table
+  %tr
+    %td Number of papers
+    %td= @faculty.papers(@year).count
+  %tr
+    %td Number of books
+    %td= @faculty.books(@year).count
+  %tr
+    %td Number of chapters
+    %td= @faculty.chapters(@year).count
+  %tr
+    %td Presentations
+    %td= @faculty.presentations(@year).count
+  %tr
+    %td Resident teaching score
+    %td= @faculty.resident_teaching
+  %tr
+    %td Med Student teaching score
+    %td= @faculty.medstudent_teaching
+  %tr
+    %td Clinical RVUs
+    %td= @faculty.clinical_rvu
+    
+Academic RVU:
+%table
+  %tr
+    %td Clinical (RVU rank overall) - out of 4pts
+    %td= "#{@all_clinical_points}"
+  %tr
+    %td Clinical (Section RVU rank) - out of 2pts
+    %td= "#{@section_clinical_points}"
+  %tr
+    %td Resident teaching - out of 2.5pts
+    %td= @res_education_points
+  %tr
+    %td Medical Student teaching - out of 0.5pts
+    %td= @ms_education_points
+  %tr
+    %td Admin points - out of 3pts
+    %td= @admin_points
+  %tr
+    %td Citizenship points - out of 3pts
+    %td= @citizenship_points
+  %tr
+    %td Longevity points - max 3pts
+    %td= @longevity_points
+  %tr
+    %td Academic points - max 3pts
+    %td= @academic_points
+  %tr
+    %td Total points -- max 24pts
+    %td= @total_points
+    
+
+.chart
+  %img{:src=>@chart_url}

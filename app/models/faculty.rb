@@ -4,6 +4,7 @@ class Faculty < ActiveRecord::Base
   belongs_to :user
   delegate :cv, :to=>:user
   delegate :name, :last_name, :first_name, :to=>:user
+  delegate :presentations, :chapters, :books, :papers, :books_and_chapters, :to=>:cv
 
   
   def points
@@ -50,9 +51,12 @@ class Faculty < ActiveRecord::Base
   
   def section_clinical_points
     section_faculty = Faculty.section_id_is(self.section_id).ascend_by_clinical_rvu.all
+    count = section_faculty.count
     points = 2
-    [0.9,0.8,0.7,0.6,0.5,0.4,0.3,0.2,0.1].each do |q|
-      points = q * 2 if clinical_rvu <= section_faculty[(count*q + 0.5).to_i].clinical_rvu
+    if count > 1
+      [0.9,0.8,0.7,0.6,0.5,0.4,0.3,0.2,0.1].each do |q|
+        points = q * 2 if clinical_rvu <= section_faculty[(count*q + 0.5).to_i].clinical_rvu
+      end
     end
     points
   end
@@ -73,7 +77,7 @@ class Faculty < ActiveRecord::Base
     if medstudent_teaching >= median
       0.5
     else
-      0
+      0.0
     end
   end
   

@@ -2,7 +2,6 @@ class Cv < ActiveRecord::Base
   
   acts_as_authorization_object
   
-  #attr_accessible :user_id
   has_many :authors
   has_many :ignored_authors
   has_many :education
@@ -51,33 +50,48 @@ class Cv < ActiveRecord::Base
     paps
   end
   
-  def papers
+  def papers(year = nil)
     paper_list = []
     authors.each do |a|
       a.papers.each do |p|
-       paper_list << p if p
+        if year
+          paper_list << p if p.pmed_date.year == year
+        else
+          paper_list << p
+        end
       end
     end 
+    paper_list.uniq!
     paper_list
   end
      
-  def books
+  def books(year = nil)
     book_list = []
     authors.each do |a|
       a.books.each do |b|
-        book_list << b if b and !b.is_chapter
+        if year
+          book_list << b if b.year == year and !b.is_chapter
+        else
+          book_list << b if b and !b.is_chapter
+        end
       end
     end
+    book_list.uniq!
     book_list
   end
   
-  def chapters
+  def chapters(year = nil)
     chapter_list = []
     authors.each do |a|
       a.books.each do |b|
-        chapter_list << b if b and b.is_chapter
+        if year
+          chapter_list << b if b.year == year and b.is_chapter
+        else
+          chapter_list << b if b and b.is_chapter
+        end
       end
     end
+    chapter_list.uniq!
     chapter_list
   end
   
@@ -90,9 +104,24 @@ class Cv < ActiveRecord::Base
         list << a.books
       end
     end
-    list.uniq!
     list.flatten!
+    list.uniq!
     list
+  end
+  
+  def presentations(year = nil)
+    presentation_list = []
+    authors.each do |a|
+      a.presentations.each do |p|
+        if year
+          presentation_list << p if p.given_at.year == year
+        else
+          presentation_list << p if p
+        end
+      end
+    end
+    presentation_list.uniq!
+    presentation_list
   end
   
   def managers
@@ -188,6 +217,8 @@ class Cv < ActiveRecord::Base
   end
   
   private
+
+    
     def make_public_address
       pcv = first_name.split(' ')[0].to_s.capitalize + last_name.capitalize
       others = Cv.public_address_like(pcv)

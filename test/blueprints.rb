@@ -3,27 +3,28 @@ require 'sham'
 
 Sham.define do
   title { Faker::Lorem.words(5).join(' ') }
-  level {Faker::Lorem.words(1)}
-  specialty {Faker::Lorem.words(2).join(' ')}
+  level(:unique=>false) { %w[residency fellowship internship][(0..2).to_a.rand.to_i] }
+  specialty(:unique=>false) {Faker::Lorem.words(2).join(' ')}
+  section_name(:unique=>false) { %w[MSK Chest Body IR Neuro][(0..4).to_a.rand.to_i] }
   last_name  { Faker::Name.last_name }
   first_name  { Faker::Name.first_name }
-  username { |u| "user#{u}"}
+  username { 'user' + (1..500).to_a.rand.to_s}
   per_name {Faker::Name.name}
   nlmuid { (1..10).map { ('0'..'9').to_a.rand } }
-  pmid { (16000..16100).to_a.rand.to_s }
+  pmid { (30000..35000).to_a.rand.to_s }
   issn { ((1..4).map {('0'..'9').to_a.rand}).to_s + "-" + ((1..4).map {('0'..'9').to_a.rand}).to_s }
-  year { (1950..(Time.now.year)).to_a.rand.to_i }
-  start_date { Date.civil((1990..2009).to_a.rand, 6,1) }
-  pages { (100..150).to_a.rand.to_s + '-' + (151..200).to_a.rand.to_s }
-  publisher {Faker::Company.name}
+  year(:unique=>false) { (1950..(Time.now.year)).to_a.rand.to_i }
+  start_date(:unique=>false) { Date.civil((1990..2009).to_a.rand, (1..12).to_a.rand,(1..15).to_a.rand) }
+  pages(:unique=>false) { (100..150).to_a.rand.to_s + '-' + (151..200).to_a.rand.to_s }
+  publisher(:unique=>false) {Faker::Company.name}
   description {Faker::Lorem.paragraph}
-  date { Date.civil( (2000..2006).to_a.rand, (1..12).to_a.rand, (1..30).to_a.rand )  }
-  later_date { Date.civil( (2007..2009).to_a.rand, (1..12).to_a.rand, (1..30).to_a.rand )  }
-  current_date { Date.civil(Time.now.year, (1..12).to_a.rand, (1..30).to_a.rand )  }
-  location {Faker::Address.city}
+  date(:unique=>false) { Date.civil( (2000..2006).to_a.rand, (1..12).to_a.rand, (1..28).to_a.rand )  }
+  later_date(:unique=>false) { Date.civil( (2007..2009).to_a.rand, (1..12).to_a.rand, (1..28).to_a.rand )  }
+  current_date(:unique=>false) { Date.civil(Time.now.year, (1..12).to_a.rand, (1..28).to_a.rand )  }
+  location(:unique=>false) {Faker::Address.city}
   email {Faker::Internet.email}
-  hours { (1..4).to_a.rand }
-  number { (1000..1100).to_a.rand.to_s }
+  hours(:unique=>false) { (1..4).to_a.rand }
+  number { (1000..2100).to_a.rand.to_s }
 
 end
 
@@ -62,8 +63,7 @@ end
 Award.blueprint do
   name {Faker::Company.bs}
   description
-  year
-  cv
+  year { (1950..(Time.now.year)).to_a.rand.to_i }
 end
 
 Book.blueprint do
@@ -71,7 +71,7 @@ Book.blueprint do
   chapter_title{Sham.title}
   publisher
   isbn { Sham.issn }
-  year 
+  year { (1950..(Time.now.year)).to_a.rand.to_i }
   pages
   is_chapter true
 end
@@ -95,7 +95,6 @@ end
 
 Certification.blueprint do
   name {Faker::Company.bs}
-  cv
   date_received {Sham.date}
 end
 
@@ -106,7 +105,6 @@ end
 Cme.blueprint do
   cme_category
   source {Faker::Company.name}
-  user
   received_date {Sham.date}
   hours
 end
@@ -118,16 +116,16 @@ end
 
 Education.blueprint do
   degree {"MD"}
-  year
+  year { (1950..(Time.now.year)).to_a.rand.to_i }
   description
-  cv
+  institution
 end
 
 Employment.blueprint do
   start_date {Sham.date}
   end_date {Sham.later_date}
   description
-  cv
+  institution
 end
 
 Faculty.blueprint do
@@ -142,7 +140,6 @@ Faculty.blueprint do
 end
 
 Grant.blueprint do
-  cv
   start_date {Sham.date}
   end_date {Sham.later_date}
   description
@@ -180,27 +177,25 @@ end
 
 Membership.blueprint do
   organization {Sham.publisher}
-  cv
-  member_since {Sham.year}
+  member_since {(1980..(Time.now.year)).to_a.rand.to_i }
 end
 
 Paper.blueprint do
   title
   pmid
-  journal_year {Sham.year}
+  journal_year {(1980..(Time.now.year)).to_a.rand.to_i }
   journal_pages {Sham.pages}
   journal
   pmed_date {Sham.date}
 end
 
 Paper.blueprint(:current) do
-  pmed_date {Sham.current_date}
+  pmed_date { Date.civil(Time.now.year, (1..12).to_a.rand, (1..28).to_a.rand )  }
 end
 
 Patent.blueprint do
-  cv
   title
-  year
+  year { (1950..(Time.now.year)).to_a.rand.to_i }
   description
   number
 end
@@ -217,15 +212,15 @@ Rank.blueprint do
 end
 
 Section.blueprint do
-  name {Sham.publisher}
+  name {Sham.section_name}
 end
 
 Training.blueprint do
   level
   specialty
-  year
+  year { (1950..(Time.now.year)).to_a.rand.to_i }
   description
-  cv
+  institution
 end
 
 User.blueprint do
@@ -238,7 +233,12 @@ User.blueprint do
   password_salt { Authlogic::Random.hex_token }
   crypted_password {Authlogic::CryptoProviders::Sha512.encrypt(password + password_salt)}
 end
+
+def make_complete_cv
   
+end
+
+
   
 
 

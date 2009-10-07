@@ -2,7 +2,7 @@ class Public::CvController < Public::PublicController
   
   def summary
     @papers=Paper.find(:all, :limit=>5, :order=>'pmed_date DESC')
-    @books = Book.find(:all)
+    @books = Book.find(:all, :limit=>5, :order=>'year DESC')
     @cme_hours = Cme.sum('hours')
   end
   

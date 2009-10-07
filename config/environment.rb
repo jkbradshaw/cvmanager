@@ -23,6 +23,7 @@ Rails::Initializer.run do |config|
   config.gem "andand"
   config.gem "haml"
   config.gem "searchlogic"
+  config.gem "gchartrb",  :lib=>'google_chart'
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named

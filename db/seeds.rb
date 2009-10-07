@@ -18,4 +18,3 @@ FCSV.foreach('journal impact.csv') do |row|
   j.short_title = short_title
   j.save
 end
-
