@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   acts_as_authentic
   acts_as_authorization_subject
   
+  attr_accessor :password
+  
   has_one :cv, :dependent=>:destroy
   has_many :cmes, :dependent=>:destroy
   has_one :faculty, :dependent=>:destroy
