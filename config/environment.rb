@@ -18,7 +18,8 @@ Rails::Initializer.run do |config|
   #config.load_paths += %W ("#{RAILS_ROOT}/lib")
 
   config.gem "authlogic"
-  config.gem "be9-acl9", :source => "http://gems.github.com", :lib => "acl9"
+  #config.gem "be9-acl9", :source => "http://gems.github.com", :lib => "acl9"
+  config.gem "acl9",  :source => "http://gemcutter.org", :lib=>"acl9"
   config.gem "libxml-ruby", :lib => "xml"
   config.gem "andand"
   config.gem "haml"

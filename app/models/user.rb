@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   end
   
   def managed
-    search = roles.name_is('manager').authorizable_type_is('Cv').all
+    search = role_objects.name_is('manager').authorizable_type_is('Cv').all
     managed_users = search.collect {|x| Cv.find(x.authorizable_id).user if Cv.exists?(x.authorizable_id)}
     managed_users
   end
