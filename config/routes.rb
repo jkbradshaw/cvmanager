@@ -2,7 +2,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :cv, :singular=> :cv_instance do |c|
     c.resource :coauthors, :name_prefix => 'cv_', :only=>[:show, :edit, :update]
-    c.resources :papers, :as=> 'articles', :new => {:new => :any, :preview => :post }, :name_prefix => 'cv_', :except => [:edit, :update], :member => { :delete => :get } 
+    c.resources :papers, :as=> 'articles', :new => {:new => :any, :preview => :post }, :name_prefix => 'cv_', :member => { :delete => :get}, :collection=>{ :journal_list => :get } 
     c.resources :books, :name_prefix => 'cv_', :member => { :delete => :get } 
     c.resources :authors, :name_prefix => 'cv_', :except => [:add, :edit, :create, :new], :member => {:unassociate => :get, :associate=>:get, :ignore=>:get, :remove=>:post}
     c.resources :education, :singular=> :education_instance, :name_prefix => 'cv_', :member => { :delete => :get } 
@@ -16,8 +16,10 @@ ActionController::Routing::Routes.draw do |map|
     c.resources :patents, :name_prefix=>'cv_', :member=>{:delete=>:get}
   end
   
+  map.journal_list 'journal_list', :controller => 'journal_list', :action => 'search'
+  
   map.resource :user, :except=>:index do |user|
-    user.resources :permissions, :collection=>{:search=>:get}, :except=>[:show,:edit,:update]
+    user.resources :managers, :name_prefix=> 'cv_', :collection=>{:search=>:get}, :except=>[:show,:edit,:update], :member => {:delete=>:get}
   end
   
   map.resources :cmes, :member => { :delete => :get }

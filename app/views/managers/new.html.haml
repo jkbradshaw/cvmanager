@@ -1,0 +1,8 @@
+%h2 Search for users
+
+-form_tag search_cv_managers_path, :method=>:get do 
+  Last Name: 
+  =text_field_tag 'search[last_name_like]'
+  First Name:
+  =text_field_tag 'search[first_name_like]'
+  =fg_submit_button 'search'

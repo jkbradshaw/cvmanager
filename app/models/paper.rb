@@ -1,12 +1,15 @@
 class Paper < ActiveRecord::Base
+  
+  include Author_list
 
   has_many :authorships, :as=> :publication, :dependent => :destroy
   has_many :authors, :through=>:authorships
   belongs_to :journal
+  accepts_nested_attributes_for :journal
   
-  validates_presence_of :pmid, :title
-  validates_uniqueness_of :pmid, :on => :create, :message =>"Paper already in database"
-  validates_format_of :pmid, :with => /^\d{5,}$/, :message => "Pubmed id must be all digits"
+  validates_presence_of :title
+  #validates_uniqueness_of :pmid, :on => :create, :message =>"Paper already in database"
+  #validates_format_of :pmid, :with => /^\d{5,}$/, :message => "Pubmed id must be all digits"
   
   before_destroy :destroy_empty_authors
   
@@ -23,22 +26,24 @@ class Paper < ActiveRecord::Base
     pmed_date.year == year
   end
   
-  def author_array=(auths)
-    if self.new_record?
-      auths.each do |key,a|
-        self.authorships.build({:author=>Author.find_or_create_by_first_and_last_name(a), :author_position=> a[:author_position].to_i})
-      end
+  def self.new_from_pmid(pmid)
+    x = get_pubmed_xml(pmid)
+    return nil unless x
+    h = pubmed_xml_to_hash(x)
+    p = Paper.new(h[:paper_info])
+    
+    h[:author_array].each do |a|
+      auth = Author.first_name_is(a[:first_name]).last_name_is(a[:last_name]).first || Author.new({:last_name => a[:last_name], :first_name=> a[:first_name]})
+      p.authorships.build({:author=>auth, :author_position=> a[:author_position].to_i})
     end
-  end
-
-  def journal_info=(journal)
-    if self.new_record?
-      if journal[:nlmuid].empty?
-        self.journal = Journal.find_by_issn(journal[:issn]) || Journal.new(journal)
-      else
-        self.journal = Journal.find_by_nlmuid(journal[:nlmuid]) || Journal.new(journal)
-      end
+    
+    if h[:journal_info][:nlmuid].empty?
+      p.journal = Journal.find_by_issn(h[:journal_info][:issn]) || Journal.new(h[:journal_info])
+    else
+      p.journal = Journal.find_by_nlmuid(h[:journal_info][:nlmuid]) || Journal.new(h[:journal_info])
     end
+    
+    p
   end
     
   def self.pubmed_xml_to_hash(paper_xml)
@@ -58,13 +63,14 @@ class Paper < ActiveRecord::Base
       :pub_model => xpath_base + "MedlineCitation/Article[PubMode]"
     }
     
+    paper_hash[:paper_info] = {}
     xpath_tags.each { |key,value| 
       xnode = paper_xml.find(xpath_tags[key])
-      paper_hash[key] = xnode.first.content unless xnode.empty?
+      paper_hash[:paper_info][key] = xnode.first.content unless xnode.empty?
     }
     
     #journal info
-    paper_hash[:journal] = {}
+    paper_hash[:journal_info] = {}
     xpath_tags = {
       :issn => xpath_base + "MedlineCitation/Article/Journal/ISSN",
       :long_title => xpath_base + "MedlineCitation/Article/Journal/Title",
@@ -73,7 +79,7 @@ class Paper < ActiveRecord::Base
     }
     xpath_tags.each {|key,value|
       xnode = paper_xml.find(xpath_tags[key])
-      paper_hash[:journal][key] = xnode.first.content unless xnode.empty?
+      paper_hash[:journal_info][key] = xnode.first.content unless xnode.empty?
     }
     
     #add pubmed date
@@ -85,11 +91,11 @@ class Paper < ActiveRecord::Base
     y = ynode.first.content.to_i unless ynode.empty?
     m = mnode.first.content.to_i unless mnode.empty?
     d = dnode.first.content.to_i unless dnode.empty?
-    paper_hash[:pmed_date] = Date.civil(y,m,d)
+    paper_hash[:paper_info][:pmed_date] = Date.civil(y,m,d)
     
     #add authors
     i=0
-    paper_hash[:authors] = []
+    paper_hash[:author_array] = []
     xpath_author = '//PubmedArticleSet/PubmedArticle/MedlineCitation/Article/AuthorList/Author'
     paper_xml.find(xpath_author).each do |a|
       l = a.find('LastName')
@@ -99,7 +105,7 @@ class Paper < ActiveRecord::Base
       i=i+1
       lname = l.first.content
       fname = f.first.content
-      paper_hash[:authors] << {:last_name=>lname, :first_name=>fname, :author_position=>i}  
+      paper_hash[:author_array] << {:last_name=>lname, :first_name=>fname, :author_position=>i}  
     end
     
     #return paper_hash

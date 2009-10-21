@@ -73,6 +73,8 @@ a:hover {text-decoration:underline; }
 
 .center {text-align: center;}
 
+.hidden {display: none;}
+
 .fg-button { outline: 0; margin:0 4px 0 0; padding: .4em 1em; text-decoration:none !important; cursor:pointer; position: relative; text-align: center; zoom: 1; }
 .fg-button .ui-icon { position: absolute; top: 50%; margin-top: -8px; left: 50%; margin-left: -8px; }
 	

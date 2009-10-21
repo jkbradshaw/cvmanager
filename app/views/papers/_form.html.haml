@@ -1,0 +1,39 @@
+
+- form_for [@cv,@paper] do |f|
+  =f.error_messages
+  %fieldset
+    %legend Article
+    %p
+      =f.label :title
+      %br
+      =f.text_field :title, :size => 90
+    %p
+      = f.label "Author list (ie: 'George Washington, David W Smith')"
+      %br
+      = f.text_field :author_list, :size=>90
+    =f.hidden_field :paper_type
+    =f.hidden_field :pmed_date
+    =f.hidden_field :pub_model
+    =f.hidden_field :abstract
+    =f.hidden_field :pmid
+
+    -f.fields_for @journal_attributes do |j|
+      %p
+        =j.label "Journal Name:"
+        %br
+        =j.text_field :long_title, :size => 60
+        =j.hidden_field :short_title
+        =j.hidden_field :issn
+        =j.hidden_field :nlmuid
+    %p
+      Year:
+      =f.text_field :journal_year, :size=>5
+      Volume:
+      =f.text_field :journal_volume, :size=>4
+      Issue:
+      =f.text_field :journal_issue, :size=>4
+      Pages:
+      =f.text_field :journal_pages, :size=>15
+    
+  =fg_submit_button 'Submit'
+  =fg_cancel_button 'Cancel'

@@ -1,0 +1,7 @@
+%h2 Are you sure?
+
+-form_tag cv_manager_path(@manager), :method=>:delete do
+  Remove #{@manager.name} as a manager of your CV?
+  %hr
+  =fg_submit_button 'yes'
+  =fg_cancel_button 'no'

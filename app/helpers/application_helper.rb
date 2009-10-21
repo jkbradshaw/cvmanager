@@ -53,11 +53,12 @@ module ApplicationHelper
     end
   end
   
-  def fg_submit_button(msg)
-    "<input type='submit' value='#{msg}' class='fg-button ui-state-default ui-corner-all' ></input>"
+  def fg_submit_button(msg, options = {})
+    id = options[:id] ? "id='#{options[:id]}'" : ""
+    "<input type='submit' value='#{msg}' #{id} class='fg-button ui-state-default ui-corner-all' ></input>"
   end
   
-  def fg_cancel_button(msg)
+  def fg_cancel_button(msg, options = {})
     "<input type='submit' value='#{msg}' name='cancel' class='fg-button ui-state-default ui-corner-all' ></input>"
   end
   

@@ -14,11 +14,6 @@
       = tab_to "Patents", cv_patents_path(@cv), controller.class == PatentsController
       = tab_to "Grants", cv_grants_path(@cv), controller.class == GrantsController
 
-- content_for :sidebar do
-  %ul
-    %li= link_to  "Authors", cv_authors_path(@cv)
-    %li= link_to 'Co-authors', cv_coauthors_path(@cv)
-  %hr
 
 
 =render :file=>'layouts/application'

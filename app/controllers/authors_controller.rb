@@ -1,6 +1,8 @@
 class AuthorsController < CvBaseController
   
   before_filter :check_for_cancel
+  
+  layout 'authorships'
 
   def index
     @authors = @cv.authors

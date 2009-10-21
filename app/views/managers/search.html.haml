@@ -1,0 +1,15 @@
+-form_tag cv_managers_path do
+
+  -for user in @matches
+    %p
+      =check_box_tag "managers[#{user.id}]"
+      ="<strong>#{user.name}<strong>"
+  %hr
+  -if @matches.count > 0
+    =fg_submit_button "add checked as managers"
+  -else
+    No matches
+    %br
+    %hr
+  =fg_cancel_button "return to list"
+    

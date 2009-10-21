@@ -1,8 +1,12 @@
 .publication
-  %span.title= "#{paper.title}"
-  %br
-  %span.journal
-    = "#{paper.journal.short_title}, #{paper.journal_volume}(#{paper.journal_issue}):#{paper.journal_pages}"
-    = paper.pmed_date
-  %br
-  %span.authors= html_authors_for(paper,@cv)
+  .head
+    %span.title= "#{paper.title} (#{paper.journal_year})"
+  .details
+    %span.journal
+      = "#{paper.journal.short_title}, #{paper.journal_volume}(#{paper.journal_issue}):#{paper.journal_pages}"
+      = paper.pmed_date
+    %br
+    %span.authors= html_authors_for(paper,@cv)
+    -if defined?(links)
+      .links.clearfix= links
+    %hr

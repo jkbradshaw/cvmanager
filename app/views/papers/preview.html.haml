@@ -1,22 +1,4 @@
-
-- form_tag cv_papers_path(@cv), :id=>'preview_pubmed' do
-  %strong Title:
-  = @paper[:title]
-  %br
-  %strong Journal:
-  = @paper[:journal][:short_title]
-  %br
-  %strong Publication date: 
-  = @paper[:pmed_date]
-  %br
-  %strong Authors:
-  = html_pubmed_authors_for(@paper[:authors])
-  %hr
-  %p.prepend-top  
-    = hidden_fields_for_paper(@paper,'paper')
-    =fg_submit_button "submit"
-    =fg_cancel_button "cancel"
-
+=render :partial => 'form', :object => @paper
 
 
 

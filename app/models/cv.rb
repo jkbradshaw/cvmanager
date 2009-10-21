@@ -128,8 +128,10 @@ class Cv < ActiveRecord::Base
     roles = Role.authorizable_type_is('Cv').authorizable_id_is(self.id).name_is('manager').all
     managers = roles.map {|r| r.users}
     managers.flatten!
+    managers.uniq!
     managers
   end
+  
   
   def coauthors(year = nil)
     auth_list = []

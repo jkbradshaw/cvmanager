@@ -1,6 +1,8 @@
 class CoauthorsController < CvBaseController
   before_filter :get_coauthors
   
+  layout 'authorships'
+  
   def show
   end
   
