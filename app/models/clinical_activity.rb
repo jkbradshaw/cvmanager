@@ -1,0 +1,2 @@
+class ClinicalActivity < Activity
+end

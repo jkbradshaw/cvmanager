@@ -9,7 +9,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091005212646) do
+ActiveRecord::Schema.define(:version => 20091022024243) do
+
+  create_table "activities", :force => true do |t|
+    t.integer  "start_year"
+    t.integer  "end_year"
+    t.string   "title"
+    t.string   "organization"
+    t.text     "description"
+    t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "cv_id"
+  end
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -23,7 +35,7 @@ ActiveRecord::Schema.define(:version => 20091005212646) do
     t.string   "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "cv_id", :unique=>true
+    t.integer  "cv_id"
   end
 
   create_table "authors", :force => true do |t|
@@ -90,7 +102,7 @@ ActiveRecord::Schema.define(:version => 20091005212646) do
   end
 
   create_table "cv", :force => true do |t|
-    t.integer  "user_id", :unique=>true
+    t.integer  "user_id"
     t.string   "public_address"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -180,7 +192,7 @@ ActiveRecord::Schema.define(:version => 20091005212646) do
 
   create_table "papers", :force => true do |t|
     t.string   "title"
-    t.string   "pmid", :unique => true
+    t.string   "pmid"
     t.string   "journal_volume"
     t.string   "journal_issue"
     t.integer  "journal_year"

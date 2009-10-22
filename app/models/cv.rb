@@ -2,6 +2,9 @@ class Cv < ActiveRecord::Base
   
   acts_as_authorization_object
   
+  belongs_to :user
+  
+  has_one :address
   has_many :authors
   has_many :ignored_authors
   has_many :education
@@ -10,10 +13,12 @@ class Cv < ActiveRecord::Base
   has_many :certifications
   has_many :employment
   has_many :training
-  has_one :address
   has_many :grants
   has_many :patents
-  belongs_to :user
+  has_many :national_positions
+  has_many :admin_positions
+  has_many :faculty_appointments
+  has_many :clinical_activities
   
   delegate :last_name, :first_name, :name, :to=>:user
   

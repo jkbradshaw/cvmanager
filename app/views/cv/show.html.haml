@@ -1,41 +1,39 @@
--content_for :actions do
-  =document_left_fg_button_to 'Make PDF', '#'
+/-content_for :actions do
+/  =document_left_fg_button_to 'Make PDF', '#'
 
 
-#cv.span-68.last
-  #name.span-68.last=@cv.name
+#cv
+  #name=@cv.name
   -if @cv.address
-    .span-68.last
-      #address
-        =one_line_address(@cv.address)
-      #contact
-        =@cv.address.phone
-        |
-        =@cv.address.email
+    #address
+      =one_line_address(@cv.address)
+    #contact
+      =@cv.address.phone
+      |
+      =@cv.address.email
   -if @cv.employment.count > 0
-    #employment.span-68.last
+    #employment
       %h2 Employment
       -for employment in @cv.employment
         =render :partial=>'employment/employment', :object=>employment
   -if @cv.training.count > 0  
-    #training.span-68.last
+    #training
       %h2 Training
       -for training in @cv.training
         =render :partial=>'training/training',:object=>training
   -if @cv.education.count > 0
-    #education.span-68.last
+    #education
       %h2 Education
       -for education in @cv.education
         =render :partial=>'education/education',:object=>education
   -if @cv.papers.count > 0
-    #papers.span-68.last
+    #papers
       %h2 Articles
       -for paper in @cv.papers
         .prepend-1
           =render :partial=>'papers/paper', :object=>paper
-          %hr
   -if @cv.books_and_chapters.count > 0
-    #books.span-68.last
+    #books
       %h2 Books and Chapters
       -for book in @cv.books_and_chapters
         .prepend-1

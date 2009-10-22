@@ -1,0 +1,2 @@
+class AdminPosition < Activity
+end

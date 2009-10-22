@@ -44,7 +44,7 @@ a:hover {text-decoration:underline; }
 #content {background-color: white;}
 
 #tabs ul {display:inline;}
-#tabs li {list-style-type:none; float:left; margin: 0.2em 0.3em 0 0.3em; padding: 0.3em 0.5em 0.3em 0.5em; background-color: #666446;}
+#tabs li {list-style-type:none; float:left; margin: 0.2em 0.2em 0 0.2em; padding: 0.3em 0.4em 0.3em 0.4em; background-color: #666446;}
 #tabs a {text-decoration: none; color:white; }
 #tabs li.active {background-color: white;}
 #tabs .active a {color: #9B3205;}

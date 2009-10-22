@@ -1,0 +1,2 @@
+class FacultyAppointment < Activity
+end

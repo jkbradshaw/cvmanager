@@ -1,0 +1,2 @@
+class NationalPosition < Activity
+end
