@@ -1,7 +1,0 @@
-%h2 Are you sure you want to delete?
-- form_for [@cv, @certification], :html=>{:method=>:delete} do |f|
-  %h4= "Delete this certification: #{@certification.andand.name}<br/>"
-  %hr
-  %p
-    =fg_submit_button "Yes"
-    =fg_cancel_button "No"

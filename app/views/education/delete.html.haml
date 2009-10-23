@@ -1,7 +1,0 @@
-%h2 Are you sure you want to delete?
-- form_tag cv_education_instance_path(@cv,@education), :method=>:delete do 
-  %h4= "Delete this education entry: #{@education.andand.degree} (#{@education.andand.year}), #{@education.andand.institution.name}<br/>"
-  %hr
-  %p
-    =fg_submit_button "Yes"
-    =fg_cancel_button "No"
