@@ -1,34 +1,28 @@
-- form_for @education, :url=> @education.new_record? ? cv_education_path(@cv) : cv_education_instance_path(@cv, @education) do |f|
+- form_for @one, :url=> @one.new_record? ? cv_education_path(@cv) : cv_education_instance_path(@cv, @one) do |f|
   = f.error_messages 
-  %p
-    Degree: 
-    %br
-    = f.text_field :degree
-  %p
-    Year:
-    %br
-    = f.text_field :year
-  %p
-    Description:
-    %br
-    = f.text_area :description
+  %br
+  =f.label :degree
+  =f.text_field :degree
+  %br
+  =f.label :year
+  =f.text_field :year, :size=>5
+  %br
+  =f.label :description
+  =f.text_area :description, :size=>'35x3'
   - f.fields_for @institution_fields do |i|
     %fieldset
       %legend Institution
-      %p
-        Name: 
-        %br
-        = i.text_field :name
-      %p
-        Location:
-        %br
-        = i.text_field :location
-      %p
-        Country:
-        %br
-        = i.text_field :country
+      =i.label :name 
+      =i.text_field :name, :size=>40
+      %br
+      =i.label :location
+      =i.text_field :location, :size=>40
+      %br
+      =i.label :country
+      =i.text_field :country, :size=>20
 
-  %p
+  %hr
+  .prepend-10
     =fg_submit_button "Submit"
     =fg_cancel_button "Cancel"
   

@@ -1,39 +1,16 @@
 -form_for @address, :url=>cv_address_path(@cv) do |f|
   =f.error_messages
+  
   %p
     =f.label :email
-    %br
-    =f.text_field :email
+    =f.text_field :email, :size=>40
   %p
     =f.label :phone
-    %br
-    =f.text_field :phone
-  %fieldset
-    %legend Address
-    %p
-      ="<strong>Address:</strong>"
-      %br
-      =f.text_field :address1
-      %br
-      =f.text_field :address2
-      %br
-      =f.text_field :address3
-    %p
-      =f.label :city
-      %br
-      =f.text_field :city
-    %p
-      =f.label :state
-      %br
-      =f.text_field :state
-    %p
-      =f.label :zip
-      %br
-      =f.text_field :zip
-    %p
-      =f.label :country
-      %br
-      =f.text_field :country
+    =f.text_field :phone, :size=>'40'
+  %p
+    =f.label :address
+    =f.text_area :address, :size=>'34x4'
+    
   %hr
   =fg_submit_button "submit"
   =fg_cancel_button "cancel"

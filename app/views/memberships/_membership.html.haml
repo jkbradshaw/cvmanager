@@ -1,0 +1,8 @@
+.membership
+  ="#{membership.andand.organization} "
+  -if links
+    .links.clearfix
+      %ul
+        %li= link_to "edit", edit_cv_membership_path(@cv,membership)
+        %li.first= link_to "remove", delete_cv_membership_path(@cv,membership)
+  %hr

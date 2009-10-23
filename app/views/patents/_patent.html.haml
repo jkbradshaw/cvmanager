@@ -1,1 +1,13 @@
-="#{patent.description}"
+.item
+  .head
+    ="#{patent.andand.title} (#{patent.andand.year})"
+  .details
+    Patent number: #{patent.andand.number}
+    %br
+    = simple_format patent.andand.description
+    -if links
+      .links.clearfix
+        %ul
+          %li= link_to "edit", edit_cv_patent_path(@cv,patent)
+          %li.first= link_to "remove", delete_cv_patent_path(@cv,patent)
+  %hr

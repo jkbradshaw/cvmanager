@@ -1,12 +1,10 @@
 %h2 Add a new paper
 
 - form_tag preview_new_cv_paper_path(@cv), :id=>'pmid_submit_form' do
-  <strong>Pubmed ID: </strong>
-  %br
+  <label for="params_pmid">Pubmed ID: </label>
   = text_field :params, 'pmid'
   = fg_submit_button 'Query Pubmed', :id=>'params_pmid_button'
-  %br
-  #params_pmid_message.error.hidden
+  %span#params_pmid_message.hidden
   %br
 #paper-form
   =render :partial => 'form', :object=>@paper

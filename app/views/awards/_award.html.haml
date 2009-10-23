@@ -1,0 +1,13 @@
+.award
+  ="#{award.andand.name} "
+  ="(#{award.andand.year})" unless award.andand.year.nil?
+  -if defined? links and links
+    .links.clearfix
+      %ul
+        %li= link_to "edit", edit_cv_award_path(@cv,award)
+        %li.first= link_to "remove", delete_cv_award_path(@cv,award)
+  %hr
+          
+        
+  
+

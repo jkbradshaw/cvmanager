@@ -1,0 +1,22 @@
+-form_for [@cv,@one] do |f|
+  =f.error_messages
+
+  =f.label :title
+  =f.text_field :title, :size => 60
+  %br
+  =f.label :organziation
+  =f.text_field :organization, :size => 60
+  %br
+  =f.label :start_year
+  =f.text_field :start_year, :size => 8
+  %br
+  =f.label :end_year
+  =f.text_field :end_year, :size => 8
+  %br
+  =f.label :description
+  =f.text_area :description, :size => '51x4'
+  
+  %hr
+  .prepend-10
+    =fg_submit_button "Submit"
+    =fg_cancel_button "Cancel"

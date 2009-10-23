@@ -1,2 +1,12 @@
-%h5= "#{employment.institution.andand.name}, #{employment.institution.andand.location} (#{employment.andand.start_date}-#{employment.andand.end_date})"
-.prepend-1= employment.andand.description
+
+.item
+  .head
+    = "#{employment.andand.start_date} to #{employment.andand.end_date} #{employment.institution.andand.name}, #{employment.institution.andand.location}"
+  .details
+    = simple_format employment.andand.description
+    -if defined? links and links
+      .links.clearfix
+        %ul
+          %li= link_to "edit", edit_cv_employment_instance_path(@cv,employment)
+          %li.first= link_to "remove", delete_cv_employment_instance_path(@cv,employment)
+    %hr

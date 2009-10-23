@@ -6,7 +6,7 @@
   #name=@cv.name
   -if @cv.address
     #address
-      =one_line_address(@cv.address)
+      =@cv.address.address.gsub("\n"," . ")
     #contact
       =@cv.address.phone
       |

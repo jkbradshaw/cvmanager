@@ -1,33 +1,29 @@
-- form_for @employment, :url=>@employment.new_record? ? cv_employment_path(@cv) : cv_employment_instance_path(@cv, @employment) do |f|
+- form_for @one, :url=>@one.new_record? ? cv_employment_path(@cv) : cv_employment_instance_path(@cv, @one) do |f|
   = f.error_messages 
 
   - f.fields_for @institution_fields do |i|
     %fieldset
       %legend Institution
-      %p
-        Name: 
-        %br
-        = i.text_field :name
-      %p
-        Location:
-        %br
-        = i.text_field :location
-      %p
-        Country:
-        %br
-        = i.text_field :country
-    %p
-      =f.label :start_date 
+      =i.label :name 
+      =i.text_field :name, :size=>40
       %br
-      = f.date_select :start_date
-    %p
-      =f.label :end_date 
+      =i.label :location
+      =i.text_field :location, :size=>40
       %br
-      = f.date_select :end_date
-    %p
-      Description:
-      %br
-      = f.text_area :description
+      =i.label :country
+      =i.text_field :country, :size=>20
 
-  =fg_submit_button "Submit"
-  =fg_cancel_button "Cancel"
+    %br
+    =f.label :start_date 
+    =f.date_select :start_date
+    %br
+    =f.label :end_date 
+    =f.date_select :end_date
+    %br
+    =f.label :description
+    = f.text_area :description, :size=>'34x4'
+
+    %hr
+    .prepend-10
+      =fg_submit_button "Submit"
+      =fg_cancel_button "Cancel"

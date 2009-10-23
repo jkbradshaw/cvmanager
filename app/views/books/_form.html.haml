@@ -1,36 +1,29 @@
 
 - form_for @book, :url => @book.new_record? ? cv_books_path(@cv) : cv_book_path(@cv,@book) do |form|
   = form.error_messages
-  %p
-    = form.label :book_title
-    %br
-    = form.text_field :book_title
-  %p
-    = form.label :chapter_title
-    %br
-    = form.text_field :chapter_title
-  %p
-    = form.label :pages
-    %br
-    = form.text_field :pages
-  %p
-    = form.label :publisher
-    %br
-    = form.text_field :publisher
-  %p
-    = form.label :year
-    %br
-    = form.text_field :year
-  %p
-    = form.label :isbn
-    %br
-    = form.text_field :isbn
-  %p
-    = form.label "Author list (ie: 'George Washington, David W Smith')"
-    %br
-    = form.text_field :author_list, :size=>60
+  %br
+  = form.label :book_title
+  = form.text_field :book_title, :size=>60
+  %br
+  = form.label :chapter_title
+  = form.text_field :chapter_title, :size=>60
+  %br
+  = form.label :pages
+  = form.text_field :pages, :size=>10
+  %br
+  = form.label :publisher
+  = form.text_field :publisher
+  %br
+  = form.label :year
+  = form.text_field :year, :size=>10
+  %br
+  = form.label :isbn
+  = form.text_field :isbn, :size=>20
+  %br
+  = form.label "Author list"
+  = form.text_area :author_list, :size=>'50x2'
   %hr
-  %p
+  .prepend-10
     = fg_submit_button "Submit"
     = fg_cancel_button "Cancel"
 

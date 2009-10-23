@@ -14,6 +14,12 @@ ActionController::Routing::Routes.draw do |map|
     c.resources :presentations, :name_prefix=>'cv_', :member=>{:delete=>:get}
     c.resources :grants, :name_prefix=>'cv_', :member=>{:delete=>:get}
     c.resources :patents, :name_prefix=>'cv_', :member=>{:delete=>:get}
+    c.resources :memberships, :name_prefix=> 'cv_', :member => {:delete => :get}
+    c.resources :faculty_appointments, :name_prefix=> 'cv_', :member => {:delete => :get}
+    c.resources :clinical_activities, :name_prefix=> 'cv_', :member => {:delete => :get} 
+    c.resources :admin_positions, :name_prefix=> 'cv_', :member => {:delete => :get}
+    c.resources :national_positions, :name_prefix=> 'cv_', :member => {:delete => :get}   
+    c.activities 'activities', :name_prefix=> 'cv_', :controller=>'activities', :action=>'index'
   end
   
   map.journal_list 'journal_list', :controller => 'journal_list', :action => 'search'

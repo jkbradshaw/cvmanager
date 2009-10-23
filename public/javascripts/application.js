@@ -44,6 +44,12 @@ $(document).ready(function(){
 		return false;
 	}).next().hide();
 	
+	$('.item .head').click(function() {
+		$(this).next().toggle();
+		return false;
+	}).next().hide();
+	
+	
 	//autocomplete for journal long_title in new paper
 	$('#paper_journal_attributes_long_title').autocomplete('/journal_list')
 

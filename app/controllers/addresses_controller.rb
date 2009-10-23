@@ -51,6 +51,9 @@ class AddressesController < CvBaseController
       @address = @cv.address
     end
     
+    def load_section
+    end
+    
     def check_for_cancel
       redirect_to cv_address_path(@cv) if params[:cancel]
     end

@@ -70,10 +70,17 @@ a:hover {text-decoration:underline; }
 #cv h5 {margin:0;}
 
 .links {float:right;}
+.links ul {display:inline;}
+.links li {list-style-type:none; float:right; margin: 0 0 0.5em 0; padding:0 1em; border-left: 1px solid #9B3205;}
+.links li.first {border:none;}
 
 .center {text-align: center;}
 
 .hidden {display: none;}
+
+label {width: 8em; float:left; text-align:right; margin-right: 0.5em; padding-top:0.5em; display: block;}
+textarea {padding:0.2em;}
+fieldset label {width: 6.5em;}
 
 .fg-button { outline: 0; margin:0 4px 0 0; padding: .4em 1em; text-decoration:none !important; cursor:pointer; position: relative; text-align: center; zoom: 1; }
 .fg-button .ui-icon { position: absolute; top: 50%; margin-top: -8px; left: 50%; margin-left: -8px; }

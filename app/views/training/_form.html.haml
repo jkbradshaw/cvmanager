@@ -1,36 +1,30 @@
-- form_for [@cv,@training], :url=>@form_path do |f|
+- form_for @one, :url=> @one.new_record? ? cv_training_path(@cv) : cv_training_instance_path(@cv, @one) do |f|
   = f.error_messages 
-  %p
-    Level (Internship, Residency, etc): 
-    %br
-    = f.text_field :level
-  %p
-    Specialty:
-    %br
-    = f.text_field :specialty
-  %p
-    Year completed:
-    %br
-    = f.text_field :year
-  %p
-    Description:
-    %br
-    = f.text_area :description
+  %br
+  =f.label :level
+  =f.text_field :level
+  %br
+  =f.label :specialty
+  =f.text_field :specialty
+  %br
+  =f.label :year
+  =f.text_field :year, :size=>5
+  %br
+  =f.label :description
+  =f.text_area :description, :size=>'35x3'
   - f.fields_for @institution_fields do |i|
     %fieldset
       %legend Institution
-      %p
-        Name: 
-        %br
-        = i.text_field :name
-      %p
-        Location:
-        %br
-        = i.text_field :location
-      %p
-        Country:
-        %br
-        = i.text_field :country
+      =i.label :name 
+      =i.text_field :name, :size=>40
+      %br
+      =i.label :location
+      =i.text_field :location, :size=>40
+      %br
+      =i.label :country
+      =i.text_field :country, :size=>20
 
-  =fg_submit_button "Submit"
-  =fg_cancel_button "Cancel"
+  %hr
+  .prepend-10
+    =fg_submit_button "Submit"
+    =fg_cancel_button "Cancel"

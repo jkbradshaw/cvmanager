@@ -1,46 +1,36 @@
--form_for [@cv,@grant] do |f|
+-form_for [@cv,@one] do |f|
   =f.error_messages
-  %p
-    =f.label :title
-    %br
-    =f.text_field :title
-  %p
-    =f.label :start_date
-    %br
-    =f.date_select :start_date
-  %p
-    =f.label :end_date
-    %br
-    =f.date_select :end_date
-  %p
-    =f.label :status
-    %br
-    =f.select :status_id, %w[active completed]
-  %p
-    <strong>Awarding agency:</strong>
-    %br
-    =f.text_field :awarded_by
-  %p
-    <strong>Grant number:</strong>
-    %br
-    =f.text_field :number
-  %p
-    =f.label :role
-    %br
-    =f.text_field :role
-  %p
-    <strong>Direct awarded amount:</strong>
-    %br
-    =f.text_field :direct_award
-  %p
-    <strong>Indirect awarded amount:</strong>
-    %br
-    =f.text_field :indirect_award
-  %p
-    =f.label :description
-    %br
-    =f.text_area :description
+  =f.label :title
+  =f.text_field :title, :size=>50
+  %br
+  =f.label :start_date
+  =f.date_select :start_date
+  %br
+  =f.label :end_date
+  =f.date_select :end_date
+  %br
+  =f.label :status
+  =f.select :status_id, %w[active completed]
+  %br
+  =f.label 'Awarding aency'
+  =f.text_field :awarded_by
+  %br
+  =f.label 'Grant number'
+  =f.text_field :number, :size=>15
+  %br
+  =f.label :role
+  =f.text_field :role, :size=>20
+  %br
+  =f.label :direct_ward
+  =f.text_field :direct_award, :size=>10
+  %br
+  =f.label :indirect_award
+  =f.text_field :indirect_award, :size=>10
+  %br
+  =f.label :description
+  =f.text_area :description, :size=>'42x3'
   %hr
-  =fg_submit_button 'submit'
-  =fg_cancel_button 'cancel'
-
+  .prepend-10
+    =fg_submit_button "Submit"
+    =fg_cancel_button "Cancel"
+  

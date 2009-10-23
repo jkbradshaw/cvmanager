@@ -1,3 +1,11 @@
-%h5= "#{education.degree}, #{education.year}"
-.prepend-1
-  = "#{education.institution.andand.name}, #{education.andand.institution.location}"
+.item
+  .head
+    = "#{education.degree}, #{education.year}, #{education.institution.andand.name}, #{education.andand.institution.location}"
+  .details
+    = simple_format education.andand.description
+    -if defined? links and links
+      .links.clearfix
+        %ul
+          %li= link_to "edit", edit_cv_education_instance_path(@cv,education)
+          %li.first= link_to "remove", delete_cv_education_instance_path(@cv,education)
+    %hr

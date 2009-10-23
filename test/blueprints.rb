@@ -29,12 +29,7 @@ Sham.define do
 end
 
 Address.blueprint do
-  address1 {Faker::Company.name}
-  address2 {Faker::Address.street_address}
-  address3 {Faker::Address.secondary_address}
-  city {Faker::Address.city}
-  state {Faker::Address.us_state}
-  country {'USA'}
+  address {Faker::Company.name + "\n" + Faker::Address.street_address + "\n" + Faker::Address.secondary_address + "\n" + Faker::Address.city + "," + Faker::Address.us_state + ", 12345"}
   email
   phone {Faker::PhoneNumber.phone_number}
   cv

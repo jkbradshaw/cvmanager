@@ -1,6 +1,5 @@
 - content_for :actions do
-  /= circle_plus_left_fg_button_to "add new paper", new_cv_paper_path(@cv)
-  = link_to "add new paper", new_cv_paper_path(@cv), :rel=>'facebox'
+  = link_to "add new paper", new_cv_paper_path(@cv)
 
 - unless @papers.nil?
   - @papers.each do |p|

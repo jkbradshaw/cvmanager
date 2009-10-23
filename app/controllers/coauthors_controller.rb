@@ -3,6 +3,8 @@ class CoauthorsController < CvBaseController
   
   layout 'authorships'
   
+  undef :index, :new, :create, :delete, :destroy
+  
   def show
   end
   
@@ -29,6 +31,16 @@ class CoauthorsController < CvBaseController
   private
     def get_coauthors
       @coauthors = @cv.coauthors(Time.now.year).sort {|x,y| x.last_name.downcase <=> y.last_name.downcase}
+    end
+    
+    def set_section
+    end
+    
+    def load_section
+    end
+    
+    def check_for_cancel
+      redirect_to :action=>'show' if params[:cancel]
     end
   
 end

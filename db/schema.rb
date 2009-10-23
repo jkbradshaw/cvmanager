@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091022024243) do
+ActiveRecord::Schema.define(:version => 20091023005513) do
 
   create_table "activities", :force => true do |t|
     t.integer  "start_year"
@@ -24,18 +24,12 @@ ActiveRecord::Schema.define(:version => 20091022024243) do
   end
 
   create_table "addresses", :force => true do |t|
-    t.string   "address1"
-    t.string   "address2"
-    t.string   "address3"
-    t.string   "city"
-    t.string   "state"
-    t.string   "zip"
-    t.string   "country"
     t.string   "email"
     t.string   "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "cv_id"
+    t.text     "address"
   end
 
   create_table "authors", :force => true do |t|

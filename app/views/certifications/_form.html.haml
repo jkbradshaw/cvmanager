@@ -1,15 +1,13 @@
-- form_for [@cv, @certification] do |f|
+- form_for [@cv, @one] do |f|
   =f.error_messages
-  %p
-    =f.label :name
-    %br
-    =f.text_field :name
-  %p
-    =f.label :date_received
-    %br
-    =f.date_select :date_received
+  %br
+  =f.label :name
+  =f.text_field :name
+  %br
+  =f.label :date_received
+  =f.date_select :date_received
 
-  %p
+  %hr
+  .prepend-10
     =fg_submit_button "Submit"
     =fg_cancel_button "Cancel"
-    

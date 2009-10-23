@@ -1,0 +1,14 @@
+-content_for :sidebar do
+  %ul
+    %li= link_to 'add Faculty Appointment', new_cv_faculty_appointment_path(@cv)
+    %li= link_to 'add National Position', new_cv_national_position_path(@cv)
+    %li= link_to 'add Admin Position', new_cv_admin_position_path(@cv)
+    %li= link_to 'add Clinical Activity', new_cv_clinical_activity_path(@cv)
+    
+-[@faculty_appointments, @national_positions, @admin_positions, @clinical_activities].each do |a|
+  -if a.count > 0
+    %h2= a.first.class.to_s.pluralize.underscore.humanize
+    -a.each do |i|
+      =render :partial => 'activities/activity', :object=>i, :locals=> {:links => true}
+
+    
