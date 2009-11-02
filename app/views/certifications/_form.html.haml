@@ -1,13 +1,5 @@
-- form_for [@cv, @one] do |f|
-  =f.error_messages
-  %br
-  =f.label :name
-  =f.text_field :name
-  %br
-  =f.label :date_received
-  =f.date_select :date_received
-
-  %hr
-  .prepend-10
-    =fg_submit_button "Submit"
-    =fg_cancel_button "Cancel"
+- form_for [@cv, @one], :builder=>CvFormBuilder do |f|
+  =f.begin_form :legend=>'Certification'
+  =f.text_field :name, :size=>50, :class=>'required alpha'
+  =f.text_field :date_received, :size=>20, :label=> 'Date', :class=>'date date_select'
+  =f.end_form

@@ -4,8 +4,5 @@
   .details
     = simple_format education.andand.description
     -if defined? links and links
-      .links.clearfix
-        %ul
-          %li= link_to "edit", edit_cv_education_instance_path(@cv,education)
-          %li.first= link_to "remove", delete_cv_education_instance_path(@cv,education)
+      =render :partial=>'cv_base/links', :locals=>{:one=>education}
     %hr

@@ -2,23 +2,15 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :cv, :singular=> :cv_instance do |c|
     c.resource :coauthors, :name_prefix => 'cv_', :only=>[:show, :edit, :update]
-    c.resources :papers, :as=> 'articles', :new => {:new => :any, :preview => :post }, :name_prefix => 'cv_', :member => { :delete => :get}, :collection=>{ :journal_list => :get } 
-    c.resources :books, :name_prefix => 'cv_', :member => { :delete => :get } 
+    c.resource :address, :name_prefix => 'cv_', :member=>{:delete=>:get, :valid=>:post}
     c.resources :authors, :name_prefix => 'cv_', :except => [:add, :edit, :create, :new], :member => {:unassociate => :get, :associate=>:get, :ignore=>:get, :remove=>:post}
-    c.resources :education, :singular=> :education_instance, :name_prefix => 'cv_', :member => { :delete => :get } 
+    c.resources :papers, :as=> 'articles', :new => {:new => :any, :preview => :post }, :name_prefix => 'cv_', :member => { :delete => :get}, :collection=>{ :journal_list => :get} 
+    c.resources :education, :singular=> :education_instance, :name_prefix => 'cv_', :member => { :delete => :get }
     c.resources :training, :singular=> :training_instance, :name_prefix => 'cv_', :member => { :delete => :get } 
-    c.resources :awards, :name_prefix => 'cv_', :member => {:delete => :get}
-    c.resources :certifications, :name_prefix => 'cv_', :member => {:delete => :get}
-    c.resource :address, :name_prefix => 'cv_', :member=>{:delete=>:get}
-    c.resources :employment, :singular=> :employment_instance, :name_prefix=>'cv_', :member=> {:delete => :get}
-    c.resources :presentations, :name_prefix=>'cv_', :member=>{:delete=>:get}
-    c.resources :grants, :name_prefix=>'cv_', :member=>{:delete=>:get}
-    c.resources :patents, :name_prefix=>'cv_', :member=>{:delete=>:get}
-    c.resources :memberships, :name_prefix=> 'cv_', :member => {:delete => :get}
-    c.resources :faculty_appointments, :name_prefix=> 'cv_', :member => {:delete => :get}
-    c.resources :clinical_activities, :name_prefix=> 'cv_', :member => {:delete => :get} 
-    c.resources :admin_positions, :name_prefix=> 'cv_', :member => {:delete => :get}
-    c.resources :national_positions, :name_prefix=> 'cv_', :member => {:delete => :get}   
+    c.resources :employment, :singular=> :employment_instance, :name_prefix=>'cv_', :member=> {:delete => :get}   
+    [:books, :awards, :certifications, :presentations, :grants, :patents, :memberships, :faculty_appointments, :clinical_activities, :admin_positions, :national_positions].each do |x|
+      c.resources x, :name_prefix => 'cv_', :member => {:delete => :get}
+    end
     c.activities 'activities', :name_prefix=> 'cv_', :controller=>'activities', :action=>'index'
   end
   

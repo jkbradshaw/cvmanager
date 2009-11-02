@@ -1,8 +1,5 @@
-.membership
+.item
   ="#{membership.andand.organization} "
-  -if links
-    .links.clearfix
-      %ul
-        %li= link_to "edit", edit_cv_membership_path(@cv,membership)
-        %li.first= link_to "remove", delete_cv_membership_path(@cv,membership)
+  -if defined? links and links
+    =render :partial=>'cv_base/links', :locals=>{:one=>membership}
   %hr

@@ -12,7 +12,6 @@ class CoauthorsController < CvBaseController
   end
   
   def update
-    #    render :text=>params.inspect and return
     unless params[:cancel] or params['coauthor'].nil?
       @coauthors.each do |c|
         if params['coauthor'].include?(c.id.to_s)

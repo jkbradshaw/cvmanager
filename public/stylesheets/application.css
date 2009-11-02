@@ -58,7 +58,8 @@ a:hover {text-decoration:underline; }
 
 #footer {color: #dddddd; text-align: center; font-size: 0.7em; background-color: #283232;}
 
-.publication span.title {
+div.item {margin:0.5em 0;}
+.item span.title {
 	font-size: 130%;
 	font-style: italic;
 }
@@ -69,18 +70,47 @@ a:hover {text-decoration:underline; }
 #cv h2 {margin: 1em 0 0 0; font-size: 1.7em;}
 #cv h5 {margin:0;}
 
+div.links {clear:both;}
 .links {float:right;}
 .links ul {display:inline;}
-.links li {list-style-type:none; float:right; margin: 0 0 0.5em 0; padding:0 1em; border-left: 1px solid #9B3205;}
+.links li {list-style-type:none; float:right; margin: 0; padding:0 0.5em 0 0.5em; border-left: 1px solid #9B3205;}
 .links li.first {border:none;}
+.confirm span {display:inline; float:right;}
 
 .center {text-align: center;}
 
 .hidden {display: none;}
 
-label {width: 8em; float:left; text-align:right; margin-right: 0.5em; padding-top:0.5em; display: block;}
-textarea {padding:0.2em;}
-fieldset label {width: 6.5em;}
+.head {cursor: pointer;}
+.head:hover {background-color:#EDD2A0; cursor:pointer;}
+
+
+label {width: 12em; float:left; text-align:right; margin-right: 0.5em; padding-top:0.5em; display: block;clear:both;}
+textarea {padding:0.2em; }
+input {margin:0;}
+fieldset label {width: 11em;}
+fieldset select{margin-top:0.5em;}
+
+em.invalid {margin-left: 12.5em; display:block;padding-top:0;margin-top:0;}
+
+fieldset fieldset {width:60%;}
+
+form table,tr,td,th {margin:0; padding:0;}
+form table label {float:right;padding-top:0;margin-top:0;margin-right:0.5em;}
+form table textarea {width:98%;margin:0.1em 0;}
+form table input { margin: 0 1em 0 0;}
+table em.invalid {margin-left:0;}
+
+table.arvu tr {border-bottom:5px solid #9B3205;}
+table.arvu th {font-size:1.4em;padding-top:0.6em;}
+table.arvu td {font-size:1.2em; padding:0.3em; border-bottom:1px solid #eeeeee;}
+table.arvu td.label {padding-left:2em;}
+table.arvu td.data {font-weight: bold;}
+
+div.errorExplanation {padding:.8em;margin-bottom:1em;border:2px solid #ddd;background:#FBE3E4;color:#8a1f11;border-color:#FBC2C4;}
+div.fieldWithErrors {padding:0;margin:0;}
+
+.focus_fix {outline:transparent;}
 
 .fg-button { outline: 0; margin:0 4px 0 0; padding: .4em 1em; text-decoration:none !important; cursor:pointer; position: relative; text-align: center; zoom: 1; }
 .fg-button .ui-icon { position: absolute; top: 50%; margin-top: -8px; left: 50%; margin-left: -8px; }

@@ -1,8 +1,5 @@
 .item
   ="#{activity.andand.start_year} - #{activity.andand.end_year}  #{activity.andand.title},  #{activity.andand.organization}"
   -if defined? links and links
-    .links.clearfix
-      %ul
-        %li= link_to "edit", send('edit_cv_' + activity.class.to_s.singularize.underscore + '_path', @cv, activity)
-        %li.first= link_to "remove", send('delete_cv_' + activity.class.to_s.singularize.underscore + '_path', @cv, activity)
+    =render :partial=>'cv_base/links', :locals=>{:one=>activity}
   %hr

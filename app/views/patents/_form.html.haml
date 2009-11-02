@@ -1,17 +1,7 @@
--form_for [@cv,@one] do |f|
-  =f.error_messages
-  =f.label :title
-  =f.text_field :title, :size=>50
-  %br
-  =f.label :year
-  =f.text_field :year, :size=>5
-  %br
-  =f.label "Patent id"
-  =f.text_field :number, :size=>15
-  %br
-  =f.label :description
-  =f.text_area :description, :size=>'42x4'
-  %hr
-  .prepend-10
-    =fg_submit_button "Submit"
-    =fg_cancel_button "Cancel"
+-form_for [@cv,@one], :builder=>CvFormBuilder do |f|
+  =f.begin_form
+  =f.text_field :title, :size=>50, :class=>'required alphanumeric'
+  =f.text_field :year, :size=>5, :class=>'year'
+  =f.text_field :number, :label=>'Patent ID', :size=>15, :class=>'alphanumeric'
+  =f.text_area :description, :size=>'42x4', :class=>'alphanumeric'
+  =f.end_form

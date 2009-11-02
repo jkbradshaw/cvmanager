@@ -23,7 +23,14 @@ class Paper < ActiveRecord::Base
   
   def published_in?(year)
     year = year.to_i
-    pmed_date.year == year
+    (pmed_date.andand.year == year) or (journal_year.andand == year)
+  end
+  
+  def published_after?(start_date)
+    (pmed_date.andand > start_date) or (journal_year.andand >= start_date.year)
+  end
+  
+  def published_between?(start_date, end_date)
   end
   
   def self.new_from_pmid(pmid)

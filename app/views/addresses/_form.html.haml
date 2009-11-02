@@ -1,16 +1,6 @@
--form_for @address, :url=>cv_address_path(@cv) do |f|
-  =f.error_messages
-  
-  %p
-    =f.label :email
-    =f.text_field :email, :size=>40
-  %p
-    =f.label :phone
-    =f.text_field :phone, :size=>'40'
-  %p
-    =f.label :address
-    =f.text_area :address, :size=>'34x4'
-    
-  %hr
-  =fg_submit_button "submit"
-  =fg_cancel_button "cancel"
+-form_for @address, :url=>cv_address_path(@cv), :builder=>CvFormBuilder do |f|
+  =f.begin_form :legend=>'Contact Information'
+  =f.text_field :email, :size=>40, :class=>'emaila'
+  =f.text_field :phone, :size=>40, :class=>'phone'
+  =f.text_area :address, :rows=>3
+  =f.end_form

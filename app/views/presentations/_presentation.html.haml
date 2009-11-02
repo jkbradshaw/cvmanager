@@ -1,0 +1,10 @@
+.item
+  .head
+    %span.title= presentation.title
+  .details
+    ="#{presentation.conference}, #{presentation.location}, #{presentation.given_at}"
+    %br
+    %span.authors= html_authors_for(presentation,@cv)
+    -if defined? links and links
+      =render :partial=>'cv_base/links', :locals=>{:one=>presentation} 
+  %hr

@@ -1,14 +1,13 @@
-%h1.content-title Login
+%h2.prepend-10 Login
 
 - form_for @user_session do |f|
 
-  %p
-    =f.label :username
-    %br
-    =f.text_field :username
-  %p
-    =f.label :password
-    %br
-    =f.password_field :password
+  %br
+  =f.label :username
+  =f.text_field :username
+  %br
+  =f.label :password
+  =f.password_field :password
   %hr
-  =fg_submit_button "login"
+  .prepend-10
+    =fg_submit_button "login"

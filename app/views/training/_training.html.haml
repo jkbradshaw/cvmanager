@@ -2,11 +2,8 @@
   .head
     = "#{training.andand.year}, #{training.andand.level} in #{training.andand.specialty}"
   .details
-    .append-20.last
-      = simple_format training.andand.description
+    = simple_format training.andand.description
     -if defined? links and links
-      .links.clearfix
-        %ul
-          %li= link_to "edit", edit_cv_training_instance_path(@cv,training)
-          %li.first= link_to "remove", delete_cv_training_instance_path(@cv,training)
+      =render :partial=>'cv_base/links', :locals=>{:one=>training}
+
     %hr

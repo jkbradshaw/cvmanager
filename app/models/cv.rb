@@ -30,7 +30,7 @@ class Cv < ActiveRecord::Base
     authors.each do |author|
       author.papers.each do |p|
         if date
-          paps << p if p.author_position(author) == 1 and p.pmed_date > date
+          paps << p if p.author_position(author) == 1 and p.published_after?(date)
         else
           paps << p if p.author_position(author) == 1
         end
@@ -45,7 +45,7 @@ class Cv < ActiveRecord::Base
     authors.each do |author|
       author.papers.each do |p|
         if date
-          paps << p if p.author_position(author) == 2 and p.author_at_position(1).trainee and p.pmed_date > date
+          paps << p if p.author_position(author) == 2 and p.author_at_position(1).trainee and p.published_after?(date)
         else
           paps << p if p.author_position(author) == 2 and p.author_at_position(1).trainee
         end
@@ -60,7 +60,7 @@ class Cv < ActiveRecord::Base
     authors.each do |a|
       a.papers.each do |p|
         if year
-          paper_list << p if p.pmed_date.year == year
+          paper_list << p if p.published_in?(year)
         else
           paper_list << p
         end

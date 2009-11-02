@@ -4,9 +4,6 @@
   ="#{grant.start_date} to #{grant.end_date}"
   %br
   =grant.description
-  -if links
-    .links.clearfix
-      %ul
-        %li= link_to "edit", edit_cv_grant_path(@cv,grant)
-        %li.first= link_to "remove", delete_cv_grant_path(@cv,grant)
+  -if defined? links and links
+    =render :partial=>'cv_base/links', :locals=>{:one=>grant}
   %hr

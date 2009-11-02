@@ -1,30 +1,13 @@
-- form_for @one, :url=> @one.new_record? ? cv_training_path(@cv) : cv_training_instance_path(@cv, @one) do |f|
-  = f.error_messages 
-  %br
-  =f.label :level
-  =f.text_field :level
-  %br
-  =f.label :specialty
-  =f.text_field :specialty
-  %br
-  =f.label :year
-  =f.text_field :year, :size=>5
-  %br
-  =f.label :description
-  =f.text_area :description, :size=>'35x3'
+- form_for @one, :url=> @one.new_record? ? cv_training_path(@cv) : cv_training_instance_path(@cv, @one), :builder=>CvFormBuilder do |f|
+  =f.begin_form
+  =f.text_field :level, :label=>'Training level', :class=>'required alpha'
+  =f.text_field :specialty, :class=>'required alpha'
+  =f.text_field :year, :size=>5, :class=>'required year'
+  =f.text_area :description, :size=>'40x3'
   - f.fields_for @institution_fields do |i|
     %fieldset
       %legend Institution
-      =i.label :name 
-      =i.text_field :name, :size=>40
-      %br
-      =i.label :location
-      =i.text_field :location, :size=>40
-      %br
-      =i.label :country
-      =i.text_field :country, :size=>20
-
-  %hr
-  .prepend-10
-    =fg_submit_button "Submit"
-    =fg_cancel_button "Cancel"
+      =i.text_field :name, :size=>40, :class=>'required alpha'
+      =i.text_field :location, :size=>40, :class=>'required alpha'
+      =i.text_field :country, :size=>20, :class=>'alpha'
+  =f.end_form

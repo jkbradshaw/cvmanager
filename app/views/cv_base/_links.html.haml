@@ -1,0 +1,11 @@
+.links.clearfix
+  .original
+    %ul
+      %li=link_to "remove", url_for(:controller=> one.class.to_s.pluralize.underscore, :action=>:delete, :cv_instance_id=>@cv, :id=> one), :class=>'delete'
+      %li.first= link_to "edit", url_for(:controller=> one.class.to_s.pluralize.underscore, :action=>:edit, :cv_instance_id=>@cv, :id=> one)
+  .confirm.hidden
+    - form_tag url_for url_for(:controller=> one.class.to_s.pluralize.underscore, :action=>:destroy, :cv_instance_id=>@cv, :id=> one) do 
+      %ul
+        %li= link_to "no", '#', :class=>'delete-cancel'
+        %li.first= link_to "yes", '#', :class=>'delete-confirm'
+      %span Really delete?

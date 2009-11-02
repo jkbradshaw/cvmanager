@@ -1,31 +1,13 @@
 
-- form_for @book, :url => @book.new_record? ? cv_books_path(@cv) : cv_book_path(@cv,@book) do |form|
-  = form.error_messages
-  %br
-  = form.label :book_title
-  = form.text_field :book_title, :size=>60
-  %br
-  = form.label :chapter_title
-  = form.text_field :chapter_title, :size=>60
-  %br
-  = form.label :pages
-  = form.text_field :pages, :size=>10
-  %br
-  = form.label :publisher
-  = form.text_field :publisher
-  %br
-  = form.label :year
-  = form.text_field :year, :size=>10
-  %br
-  = form.label :isbn
-  = form.text_field :isbn, :size=>20
-  %br
-  = form.label "Author list"
-  = form.text_area :author_list, :size=>'50x2'
-  %hr
-  .prepend-10
-    = fg_submit_button "Submit"
-    = fg_cancel_button "Cancel"
-
+- form_for @one, :url => @one.new_record? ? cv_books_path(@cv) : cv_book_path(@cv,@one), :builder=>CvFormBuilder do |form|
+  = form.begin_form
+  = form.text_field :book_title, :size=>60, :class=>'required alpha'
+  = form.text_field :chapter_title, :size=>60, :class=>'alpha'
+  = form.text_field :pages, :size=>10, :class=>'required pages'
+  = form.text_field :publisher, :class=>'alpha'
+  = form.text_field :year, :size=>10, :class=>'required year'
+  = form.text_field :isbn, :size=>20, :class=>'isbn'
+  = form.text_area :author_list, :rows=>2, :class=>'required author_list'
+  =form.end_form
 
 

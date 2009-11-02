@@ -1,39 +1,21 @@
 
-- form_for [@cv,@paper] do |f|
-  =f.error_messages
-  %fieldset
-    %legend Article
-    =f.label :title
-    =f.text_area :title, :size => '50x2'
-    %br
-    =f.label "Author list"
-    =f.text_area :author_list, :size=>'50x2'
-    %br
-    =f.hidden_field :paper_type
-    =f.hidden_field :pmed_date
-    =f.hidden_field :pub_model
-    =f.hidden_field :abstract
-    =f.hidden_field :pmid
+- form_for [@cv,@one], :builder=>CvFormBuilder do |f|
+  =f.begin_form :legend=>'Article'
+  = f.text_area :title, :rows=>2,  :class=>'required'
+  = f.text_area :author_list, :rows=>2, :class=>'required author_list'
+  -f.fields_for @journal_attributes do |j|
+    =j.text_field :long_title, :size=>50, :label=>'Journal'
+    =j.hidden_field :short_title
+    =j.hidden_field :issn
+    =j.hidden_field :nlmuid
+  = f.text_field :journal_year, :size=>5, :class=>'year', :label=>'Year'
+  = f.text_field :journal_volume, :size=>5, :class=>'volume', :label=>'Volume'
+  = f.text_field :journal_issue, :size=>5, :class=>'issue', :label=>'Issue'
+  = f.text_field :journal_pages, :size=>15, :class=>'pages', :label=>'Pages'
 
-    -f.fields_for @journal_attributes do |j|
-      =j.label :journal
-      =j.text_field :long_title, :size => 59
-      =j.hidden_field :short_title
-      =j.hidden_field :issn
-      =j.hidden_field :nlmuid
-    %br
-    =f.label :year
-    =f.text_field :journal_year, :size=>5
-    %br
-    =f.label :volume
-    =f.text_field :journal_volume, :size=>4
-    %br
-    =f.label :issue
-    =f.text_field :journal_issue, :size=>4
-    %br
-    =f.label :pages
-    =f.text_field :journal_pages, :size=>15
-  %hr
-  .prepend-10  
-    =fg_submit_button 'Submit'
-    =fg_cancel_button 'Cancel'
+  =f.hidden_field :paper_type
+  =f.hidden_field :pmed_date
+  =f.hidden_field :pub_model
+  =f.hidden_field :abstract
+  =f.hidden_field :pmid
+  =f.end_form

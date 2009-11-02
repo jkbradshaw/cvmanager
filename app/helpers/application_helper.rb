@@ -59,6 +59,7 @@ module ApplicationHelper
   end
   
   def fg_cancel_button(msg, options = {})
+    # "<input type='submit' value='#{msg}' name='cancel' class='fg-button ui-state-default ui-corner-all' ></input>"
     "<input type='submit' value='#{msg}' name='cancel' class='fg-button ui-state-default ui-corner-all' ></input>"
   end
   

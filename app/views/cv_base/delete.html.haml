@@ -1,5 +1,5 @@
 %h2 Are you sure you want to delete?
-- form_for [@cv, @one], :html=>{:method=>:delete} do |f|
+- form_for @one, :url=>{:action=>:destroy}, :html=>{:method=>:delete} do |f|
   %h4= "Delete this #{@section_name.singularize.humanize}:"
   =render :partial => "#{@section_name.pluralize}/#{@section_name.singularize}", :object=>@one, :locals => {:links => false }
   %p

@@ -1,9 +1,6 @@
 
-.certification
+.item
   = "#{certification.andand.name} (#{certification.andand.date_received})"
-  -if links
-    .links.clearfix
-      %ul
-        %li= link_to "edit", edit_cv_certification_path(@cv,certification)
-        %li.first= link_to "remove", delete_cv_certification_path(@cv,certification)
+  -if defined? links and links
+    =render :partial=>'cv_base/links', :locals=>{:one=>certification}
   %hr

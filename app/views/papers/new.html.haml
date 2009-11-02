@@ -3,8 +3,8 @@
 - form_tag preview_new_cv_paper_path(@cv), :id=>'pmid_submit_form' do
   <label for="params_pmid">Pubmed ID: </label>
   = text_field :params, 'pmid'
-  = fg_submit_button 'Query Pubmed', :id=>'params_pmid_button'
+  = fg_submit_button 'Query Pubmed', :id=>'params_pmid_button', :class=>'required pmid'
   %span#params_pmid_message.hidden
   %br
 #paper-form
-  =render :partial => 'form', :object=>@paper
+  =render :partial => 'form', :object=>@one

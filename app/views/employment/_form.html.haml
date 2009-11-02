@@ -1,29 +1,12 @@
-- form_for @one, :url=>@one.new_record? ? cv_employment_path(@cv) : cv_employment_instance_path(@cv, @one) do |f|
-  = f.error_messages 
-
+- form_for @one, :url=>@one.new_record? ? cv_employment_path(@cv) : cv_employment_instance_path(@cv, @one), :builder=>CvFormBuilder do |f|
+  = f.begin_form :legend => 'Employment' 
   - f.fields_for @institution_fields do |i|
     %fieldset
       %legend Institution
-      =i.label :name 
-      =i.text_field :name, :size=>40
-      %br
-      =i.label :location
-      =i.text_field :location, :size=>40
-      %br
-      =i.label :country
-      =i.text_field :country, :size=>20
-
-    %br
-    =f.label :start_date 
-    =f.date_select :start_date
-    %br
-    =f.label :end_date 
-    =f.date_select :end_date
-    %br
-    =f.label :description
-    = f.text_area :description, :size=>'34x4'
-
-    %hr
-    .prepend-10
-      =fg_submit_button "Submit"
-      =fg_cancel_button "Cancel"
+      =i.text_field :name, :size=>40,  :class=>'required alphanumeric'
+      =i.text_field :location, :size=>40,  :class=>'alphanumeric'
+      =i.text_field :country, :size=>20, :class=>'alphanumeric'
+  =f.text_field :start_date, :class=>'date date_select'
+  =f.text_field :end_date, :class=>'date date_select'
+  =f.text_area :description, :size=>'34x4', :class=>'alphanumeric'
+  =f.end_form

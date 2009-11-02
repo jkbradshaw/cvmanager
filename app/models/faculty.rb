@@ -27,7 +27,7 @@ class Faculty < ActiveRecord::Base
   
   def academic_points
     start_date = Date.civil(Time.now.year,1,1)
-    all_papers = cv.papers.reject {|x| x.pmed_date < (Date.civil(Time.now.year,1,1)) }
+    all_papers = cv.papers(Time.now.year)
     papers1 = cv.first_authorship_papers(start_date)
     papers2 = cv.second_authorship_papers_with_trainee(start_date)
     papers_other = all_papers - papers1 - papers2

@@ -1,67 +1,67 @@
 %h2= @faculty.name
 %hr
-Faculty Statistics:
-%table
+
+%table.span-45.arvu
   %tr
-    %td Total faculty members:
-    %td= @faculty_count
+    %th Faculty Statistics:
   %tr
-    %td Total section members:
-    %td= @section_count
-    
-Personal Statistics for #{@year}:
-%table
+    %td.span-35.label Total faculty members:
+    %td.span-10.data= @faculty_count
   %tr
-    %td Number of papers
-    %td= @faculty.papers(@year).count
+    %td.span-35.label Total section members:
+    %td.span-10.data= @section_count
   %tr
-    %td Number of books
-    %td= @faculty.books(@year).count
+    %th Personal Statistics for #{@year}:
   %tr
-    %td Number of chapters
-    %td= @faculty.chapters(@year).count
+    %td.span-35.label Number of papers
+    %td.span-10.data= @faculty.papers(@year).count
   %tr
-    %td Presentations
-    %td= @faculty.presentations(@year).count
+    %td.span-35.label Number of books
+    %td.span-10.data= @faculty.books(@year).count
   %tr
-    %td Resident teaching score
-    %td= @faculty.resident_teaching
+    %td.span-35.label Number of chapters
+    %td.span-10.data= @faculty.chapters(@year).count
   %tr
-    %td Med Student teaching score
-    %td= @faculty.medstudent_teaching
+    %td.span-35.label Presentations
+    %td.span-10.data= @faculty.presentations(@year).count
   %tr
-    %td Clinical RVUs
-    %td= @faculty.clinical_rvu
-    
-Academic RVU:
-%table
+    %td.span-35.label Resident teaching score
+    %td.span-10.data= @faculty.resident_teaching
   %tr
-    %td Clinical (RVU rank overall) - out of 4pts
-    %td= "#{@all_clinical_points}"
+    %td.span-35.label Med Student teaching score
+    %td.span-10.data= @faculty.medstudent_teaching
   %tr
-    %td Clinical (Section RVU rank) - out of 2pts
-    %td= "#{@section_clinical_points}"
+    %td.span-35.label Clinical RVUs
+    %td.span-10.data= @faculty.clinical_rvu
   %tr
-    %td Resident teaching - out of 2.5pts
-    %td= @res_education_points
+    %th Academic RVU:
   %tr
-    %td Medical Student teaching - out of 0.5pts
-    %td= @ms_education_points
+    %td.span-35.label Clinical (RVU rank overall) - out of 4pts
+    %td.span-10.data= "#{@all_clinical_points}"
   %tr
-    %td Admin points - out of 3pts
-    %td= @admin_points
+    %td.span-35.label Clinical (Section RVU rank) - out of 2pts
+    %td.span-10.data= "#{@section_clinical_points}"
   %tr
-    %td Citizenship points - out of 3pts
-    %td= @citizenship_points
+    %td.span-35.label Resident teaching - out of 2.5pts
+    %td.span-10.data= @res_education_points
   %tr
-    %td Longevity points - max 3pts
-    %td= @longevity_points
+    %td.span-35.label Medical Student teaching - out of 0.5pts
+    %td.span-10.data= @ms_education_points
   %tr
-    %td Academic points - max 3pts
-    %td= @academic_points
+    %td.span-35.label Admin points - out of 3pts
+    %td.span-10.data= @admin_points
   %tr
-    %td Total points -- max 24pts
-    %td= @total_points
+    %td.span-35.label Citizenship points - out of 3pts
+    %td.span-10.data= @citizenship_points
+  %tr
+    %td.span-35.label Longevity points - max 3pts
+    %td.span-10.data= @longevity_points
+  %tr
+    %td.span-35.label Academic points - max 3pts
+    %td.span-10.data= @academic_points
+  %tr
+    %td.span-35.label Total points -- max 24pts
+    %td.span-10.data= @total_points
     
 
 .chart

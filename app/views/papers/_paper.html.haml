@@ -1,4 +1,4 @@
-.publication
+%div(class='item' id="paper-#{paper.id}")
   .head
     %span.title= "#{paper.title} (#{paper.journal_year})"
   .details
@@ -7,6 +7,7 @@
       = paper.pmed_date
     %br
     %span.authors= html_authors_for(paper,@cv)
-    -if defined?(links)
-      .links.clearfix= links
-    %hr
+    -if defined?(links) and links
+      %div(class='links' id="links-#{paper.id}")
+        =render :partial => 'cv_base/links', :locals=>{:one=>paper}
+

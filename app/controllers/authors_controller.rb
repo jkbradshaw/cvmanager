@@ -1,9 +1,9 @@
 class AuthorsController < CvBaseController
   
-  before_filter :check_for_cancel
-  
   layout 'authorships'
-
+  
+  undef :edit, :new, :create, :update
+  
   def index
     @authors = @cv.authors
     @possible_authors = @cv.possible_authors

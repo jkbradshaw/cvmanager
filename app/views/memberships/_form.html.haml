@@ -1,11 +1,5 @@
-- form_for [@cv, @one] do |f|
-  =f.error_messages
-  =f.label :organization
-  =f.text_field :organization
-  %br
-  =f.label :member_since
-  =f.text_field :member_since, :size=>5
-  %hr
-  .prepend-10
-    =fg_submit_button "Submit"
-    =fg_cancel_button "Cancel"
+- form_for [@cv, @one], :builder=>CvFormBuilder do |f|
+  =f.begin_form
+  =f.text_field :organization, :class=>'required'
+  =f.text_field :member_since, :size=>5, :class=>'year'
+  =f.end_form

@@ -11,20 +11,23 @@ class CvBaseController < ApplicationController
     allow :admin
     allow :owner, :manager, :of=>:cv
   end
-  
+    
   def index
-    @columns = @section_class.column_names
-    %w[start_date end_date year date_received member_since].each do |y|
-      if @columns.include?(y)
-        @order = "#{y} DESC"
+    unless defined? @all
+      @columns = @section_class.column_names
+      %w[start_date end_date year date_received member_since].each do |y|
+        if @columns.include?(y)
+          @order = "#{y} DESC"
+        end
       end
+    
+      @all = defined?(@order) ? @cv.send(@section_name).find(:all, :order=>@order) : @cv.send(@section_name).all
     end
-    @all = defined?(@order) ? @cv.send(@section_name).find(:all, :order=>@order) : @cv.send(@section_name).all
     render :template => 'cv_base/index'
   end
   
   def new
-    @one = @cv.send(@section_name).new
+    @one = @cv.send(@section_name).new unless defined?(@one)
     render :template => 'cv_base/new'
   end
   
@@ -32,27 +35,51 @@ class CvBaseController < ApplicationController
   end
   
   def create
-    @one = @cv.send(@section_name).new(params[@section_name.singularize.to_sym])
-    if @one.save
-      flash[:notice] = "Successfully added new #{@section_name.singularize.humanize}"
-      redirect_to :action=>'index'
-    else
-      flash[:error] = "Problem creating"
-      render :action=>'new'
+    @one = @cv.send(@section_name).new(params[@section_name.singularize.to_sym]) unless defined? @one
+    respond_to do |format|
+      format.html do
+        if @one.save
+          flash[:notice] = "Successfully added new #{@section_name.singularize.humanize}"
+          redirect_to :action=>'index'
+        else
+          flash[:error] = "Problem creating"
+          render :template=>'cv_base/new'
+        end
+      end
+      format.js do
+        if @one.save
+          flash[:notice] = "Successfully added new #{@section_name.singularize.humanize}"
+          redirect_to :action=>'index'
+        else
+          @errors = @one.errors.to_a.map {|x| x[0] = [@section_name.singularize.underscore + '_' + x[0],x[1]] }
+          render :json => @errors
+        end
+      end
     end
   end
   
   def edit
-    render :template => 'cv_base/new'
+    render :template => 'cv_base/edit'
   end
   
   def update
-    if @one.update_attributes(params[@section_name.singularize.to_sym])
-      flash[:notice] = "Successflly updated"
-      redirect_to :action=>'index'
-    else
-      flash[:error] = "Problem updating"
-      render :action=>'edit'
+    respond_to do |format|
+      format.html do
+        if @one.update_attributes(params[@section_name.singularize.to_sym]) 
+          flash[:notice] = "Successflly updated"
+          redirect_to :action=>'index'
+        else
+          flash[:error] = "Problem updating"
+          render :action=>'edit'
+        end
+      end
+      format.js do
+        if @one.update_attributes(params[@section_name.singularize.to_sym]) 
+          render :json => {:success=>true }
+        else
+          render :json => {:errors => @one.errors}
+        end
+      end
     end
   end
   
@@ -61,12 +88,20 @@ class CvBaseController < ApplicationController
   end
   
   def destroy
-    if @one.destroy
-      flash[:notice] = "Successfully removed"
-    else
-      flash[:error] = "Problem removing"
+    respond_to do |format|
+      format.html do
+        if @one.destroy
+          flash[:notice] = "Successfully removed"
+        else
+          flash[:error] = "Problem removing"
+        end
+        redirect_to :action=>'index'
+      end
+      format.js do
+        @one.destroy
+        render :nothing=>true
+      end
     end
-    redirect_to :action=>'index'
   end
   
   private
@@ -92,5 +127,6 @@ class CvBaseController < ApplicationController
     def check_for_cancel
       redirect_to :action=>'index' if params[:cancel]
     end
+
     
 end

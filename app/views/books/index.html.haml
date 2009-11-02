@@ -1,27 +1,17 @@
 - content_for :actions do
-  = circle_plus_left_fg_button_to "add new", @add_new_path
+  = link_to "add new", @add_new_path
 
 - if @chapters.count > 0
   %h2 Chapters
-  .publications
   - for chapter in @chapters
-    =render :partial=>'book',:object=>chapter
-    .links.clearfix
-      = link_to 'remove', @cv ? delete_cv_book_path(@cv,chapter) : delete_book_path(chapter) 
-      |
-      = link_to "edit", @cv ? edit_cv_book_path(@cv, chapter) : edit_book_path(chapter)
-    %hr
+    =render :partial=>'book',:object=>chapter, :locals=>{:links=>true}
+
       
 - if @books.count > 0
   %h2 Books
-  .publications
   - @books.each do |book|
-    =render :partial=>'book', :object=>book
-    .links.clearfix
-      = link_to "remove", @cv ? delete_cv_book_path(@cv,book) : delete_book_path(book) 
-      |
-      = link_to "edit", @cv ? edit_cv_book_path(@cv, book) : edit_book_path(book)
-    %hr
+    =render :partial=>'book', :object=>book, :locals=>{:links=>true}
+
     
 
 

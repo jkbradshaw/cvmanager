@@ -1,14 +1,7 @@
-- form_for [@cv, @one] do |f|
-  =f.error_messages
-  =f.label :name
-  =f.text_field :name, :size=>40
-  %br
-  =f.label :year
-  =f.text_field :year, :size=>5
-  %br
-  =f.label :description
-  =f.text_area :description, :size=>'34x4'
-  %hr
-  .prepend-10
-    =fg_submit_button "Submit"
-    =fg_cancel_button "Cancel"    
+- form_for [@cv, @one], :builder=>CvFormBuilder do |f|
+  =f.begin_form :legend=>'Award'
+  =f.text_field :name, :size=>40, :class=>'required'
+  =f.text_field :year, :size=>5, :class=>'year'
+  =f.text_area :description, :size=>'34x4', :class=>'alphanumeric'
+  =f.end_form
+   
