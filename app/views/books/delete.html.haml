@@ -1,6 +1,0 @@
-%h2 Are you sure you want to delete?
-- form_for @book, :html=>{:method=>:delete}, :url=>cv_book_path(@cv) do |f|
-  = @book.is_chapter? ? "#{@book.chapter_title} in #{@book.book_title}" : @book.book_title
-  %br
-  = fg_submit_button "Yes"
-  = fg_cancel_button "No"

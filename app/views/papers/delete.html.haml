@@ -1,7 +1,0 @@
-%h2 Are you sure you want to delete?
-- form_tag cv_paper_path(@cv,@paper), :method=>:delete do 
-  = @paper.title
-  %br
-  %p
-    = fg_submit_button "Yes"
-    = fg_cancel_button "Cancel"

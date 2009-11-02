@@ -1,7 +1,0 @@
-%h2 Are you sure you want to delete?
--form_tag cv_presentation_path(@cv,@presentation), :method=>:delete do
-  Delete this presentation:
-  =@presentation.title
-  %hr
-  =fg_submit_button "yes"
-  =fg_cancel_button "cancel"
