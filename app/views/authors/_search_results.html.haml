@@ -1,0 +1,10 @@
+-if @query
+  -if @results.size > 0
+    -@results.each do |author|
+      #{author.name}
+      .links.clearfix
+        %ul
+          %li.first=link_to 'add author', associate_cv_author_path(@cv,author)
+      %hr
+  -else
+    No matches found

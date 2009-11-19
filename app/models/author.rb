@@ -6,6 +6,8 @@ class Author < ActiveRecord::Base
   has_many :authorships
   belongs_to :cv
   
+  named_scope :unassigned, :conditions => {:cv_id => nil}
+  
   def name
     "#{first_name} #{last_name}"
   end

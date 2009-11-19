@@ -10,7 +10,7 @@ class PapersController < CvBaseController
   def new
     @one = Paper.new
     @journal_attributes = :journal_attributes
-  end 
+  end
   
   def create
     @one = Paper.new(params[:paper])
@@ -43,6 +43,10 @@ class PapersController < CvBaseController
     
   end
   
+  def edit
+    @journal_attributes = :journal
+    super
+  end
   
   private
     def load_section

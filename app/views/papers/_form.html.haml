@@ -4,7 +4,7 @@
   = f.text_area :title, :rows=>2,  :class=>'required'
   = f.text_area :author_list, :rows=>2, :class=>'required author_list'
   -f.fields_for @journal_attributes do |j|
-    =j.text_field :long_title, :size=>50, :label=>'Journal'
+    =j.text_field :long_title, :size=>70, :label=>'Journal'
     =j.hidden_field :short_title
     =j.hidden_field :issn
     =j.hidden_field :nlmuid

@@ -15,8 +15,9 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
   
-  def update_permissions(params)
-    params = params.collect {|key,value| key.to_sym}
+  def update_permissions(p=[])
+    p = [] unless p
+    params = p.collect {|key,value| key.to_sym}
     set_roles = params & @@site_permissions
     remove_roles = @@site_permissions - params
     set_roles.each do |r|

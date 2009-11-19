@@ -26,7 +26,11 @@ jQuery.fn.delay = function(time, name) {
 
 jQuery.fn.submitWithAjax = function() {
   this.submit( function() {
-    $.post(this.action, $(this).serialize(), null, "script");
+	$('#spinner').show();
+    $.post(this.action, $(this).serialize(), function() {
+			$('#spinner').hide();
+		},
+		 "script");
     return false;
   });
   return this;
@@ -62,17 +66,28 @@ $(document).ready(function(){
 	
 	// click on item title to show the details
 	$('.item .head').click(function() {
-		$(this).next().toggle();
+		$(this).next().toggle('slide', {direction: 'up'}, 500);
 		return false;
 	}).next().hide();
 	
 	
 	//autocomplete for journal long_title in new paper
 	$('#paper_journal_attributes_long_title').autocomplete('/journal_list');
+	
+	//autocomplete for CME categories
+	$('#cme_cme_category_attributes_category').autocomplete('/cme_categories_list');
 
 
 	//update paper fields from pubmed instead of loading preview
 	$('#pmid_submit_form').submitWithAjax();
+	
+	//search form
+	
+	$('form#search_form').submit(function(event) {
+		event.preventDefault();
+		$.get(this.action, $(this).serialize(), null, "script")
+		return false;
+	});
 	
 	//improve delete links -- confirmation on page
 	$('a.delete').click(function(event) {
@@ -81,7 +96,7 @@ $(document).ready(function(){
 		var confirm = original.next('div.confirm');
 		var item = original.closest('div.item');
 		original.hide();
-		confirm.show();
+		confirm.show('clip', 400);
 		item.addClass('highlight');
 	});
 	
@@ -91,7 +106,7 @@ $(document).ready(function(){
 		var original = confirm.prev('div.original');
 		var item = original.closest('div.item');
 		confirm.hide();
-		original.show();
+		original.show('clip',400);
 		item.removeClass('highlight');
 	})
 	
@@ -111,6 +126,9 @@ $(document).ready(function(){
 		return false;
 	})
 	
+	//inplace editing for admin faculty
+	$('table#faculty').inPlaceEdit();
+	
 	//date select
 	$('.date_select').datepicker();
 
@@ -120,14 +138,12 @@ $(document).ready(function(){
 		ignore: ".ignore",
 		errorClass:"invalid",
 		errorElement: "em"
-
 	});
 	
 	$('#new_paper').validate({
 		ignore: ".ignore",
 		errorClass:"invalid",
 		errorElement: "em"
-
 	});
 	//fix cancel button function
 	$("input[name='cancel']").bind('click', function () {
@@ -135,9 +151,5 @@ $(document).ready(function(){
 	     $(this).parent('form').submit();
 		});
 	
-
-
-
-
 });
 

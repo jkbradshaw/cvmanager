@@ -107,10 +107,13 @@ table.arvu td {font-size:1.2em; padding:0.3em; border-bottom:1px solid #eeeeee;}
 table.arvu td.label {padding-left:2em;}
 table.arvu td.data {font-weight: bold;}
 
+input.in_place_edit {width:98%;border:0;padding:0;margin:0;font-size:inherit;font:inherit;background:green;}
+.selected {background:yellow;}
+
 div.errorExplanation {padding:.8em;margin-bottom:1em;border:2px solid #ddd;background:#FBE3E4;color:#8a1f11;border-color:#FBC2C4;}
 div.fieldWithErrors {padding:0;margin:0;}
 
-.focus_fix {outline:transparent;}
+#search_results, #author_preview {margin-top:3em;}
 
 .fg-button { outline: 0; margin:0 4px 0 0; padding: .4em 1em; text-decoration:none !important; cursor:pointer; position: relative; text-align: center; zoom: 1; }
 .fg-button .ui-icon { position: absolute; top: 50%; margin-top: -8px; left: 50%; margin-left: -8px; }

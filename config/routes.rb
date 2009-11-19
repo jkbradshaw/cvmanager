@@ -3,7 +3,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :cv, :singular=> :cv_instance do |c|
     c.resource :coauthors, :name_prefix => 'cv_', :only=>[:show, :edit, :update]
     c.resource :address, :name_prefix => 'cv_', :member=>{:delete=>:get, :valid=>:post}
-    c.resources :authors, :name_prefix => 'cv_', :except => [:add, :edit, :create, :new], :member => {:unassociate => :get, :associate=>:get, :ignore=>:get, :remove=>:post}
+    c.resources :authors, :name_prefix => 'cv_', :except => [:add, :edit, :create, :new], :member => {:unassociate => :get, :associate=>:get, :ignore=>:get, :remove=>:post}, :collection=>{:search=>:get}
     c.resources :papers, :as=> 'articles', :new => {:new => :any, :preview => :post }, :name_prefix => 'cv_', :member => { :delete => :get}, :collection=>{ :journal_list => :get} 
     c.resources :education, :singular=> :education_instance, :name_prefix => 'cv_', :member => { :delete => :get }
     c.resources :training, :singular=> :training_instance, :name_prefix => 'cv_', :member => { :delete => :get } 
@@ -15,6 +15,7 @@ ActionController::Routing::Routes.draw do |map|
   end
   
   map.journal_list 'journal_list', :controller => 'journal_list', :action => 'search'
+  map.cme_category_list 'cme_categories_list', :controller => 'cme_categories_list', :action => 'search'
   
   map.resource :user, :except=>:index do |user|
     user.resources :managers, :name_prefix=> 'cv_', :collection=>{:search=>:get}, :except=>[:show,:edit,:update], :member => {:delete=>:get}

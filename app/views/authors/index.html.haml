@@ -1,26 +1,29 @@
+-content_for :actions do
+  =link_to 'Search for matches', search_cv_authors_path(@cv)
+
 #assigned-authors.append-bottom
-  %h2.content-title= @cv ? "Assigned Authors" : "Authors in database"
+  %h2.content-title Pseudonyms and different spellings for #{@cv.name}
   - @authors.each do |author|
-    =h "#{author.first_name} #{author.last_name}"
+    =h "#{author.name}"
     .links.clearfix
-      - if @cv
-        = link_to "unassociate", unassociate_cv_author_path(@cv,author)
-        |
-      = link_to "view", @cv ? cv_author_path(@cv, author) : author_path(author)
+      %ul
+        %li= link_to "remove from cv", unassociate_cv_author_path(@cv,author)
+        %li.first= link_to "view publications", @cv ? cv_author_path(@cv, author) : author_path(author)
     %hr
     
 - unless @possible_authors.nil? or @possible_authors.empty?
   #possible-authors.append-bottom
-    %h2.content-title Possible Authors
+    %h2.content-title Possible matches already in the database
     - @possible_authors.each do |author|
-      = "#{author.first_name} #{author.last_name}"
+      = "#{author.name}"
       .links.clearfix
-        = link_to "associate", associate_cv_author_path(@cv,author)
-        | 
-        = link_to "view", cv_author_path(@cv, author)
-        | 
-        = link_to "ignore", ignore_cv_author_path(@cv, author)
+        %ul
+          %li= link_to "link to cv", associate_cv_author_path(@cv,author)
+          %li= link_to "view publications", cv_author_path(@cv, author)
+          %li.first= link_to "ignore", ignore_cv_author_path(@cv, author)
       %hr
+
+
 
 
 

@@ -1,8 +1,9 @@
 class AuthorsController < CvBaseController
   
   layout 'authorships'
+  before_filter :load_author, :except => [:index, :search]
   
-  undef :edit, :new, :create, :update
+  undef :edit, :new, :create
   
   def index
     @authors = @cv.authors
@@ -10,16 +11,22 @@ class AuthorsController < CvBaseController
   end
   
   def show
-    @author = Author.find(params[:id])
+  end
+  
+  def search
+    @query = true if params[:search] and params[:search].values.uniq.reject{|x| x==nil or x==''}.size > 0
+    @results = Author.search(params[:search].merge({:unassigned=>true})).all - @cv.coauthors if @query
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
   
   # associate/update pair
   def associate  
-    @author = Author.find(params[:id])
   end
   
   def update
-    @author = Author.find(params[:id])
     if @cv.add_authors(@author)
       flash[:notice] = "Successfully associated."
     else
@@ -30,11 +37,9 @@ class AuthorsController < CvBaseController
   
   # ignore/remove pair
   def ignore
-    @author = Author.find(params[:id])
   end
   
   def remove
-    @author = Author.find(params[:id])
     if @cv.ignore_authors(@author)
       flash[:notice] = "Successfully ignored"
     else
@@ -45,11 +50,9 @@ class AuthorsController < CvBaseController
 
   # unassociate/destroy pair
   def unassociate
-    @author = Author.find(params[:id])
   end
   
   def destroy
-    @author = Author.find(params[:id])
     if @cv.remove_authors(@author)
       flash[:notice] = "Successfully unassociated"
     else
@@ -61,6 +64,13 @@ class AuthorsController < CvBaseController
   private
     def check_for_cancel
       redirect_to cv_authors_path(@cv) if params[:cancel]
+    end
+    
+    def load_author
+      @author = Author.find(params[:id])
+    end
+    
+    def load_section
     end
     
   

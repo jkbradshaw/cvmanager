@@ -1,5 +1,7 @@
 -content_for :actions do
-  =circle_plus_left_fg_button_to "add new", new_cv_manager_path
+  %ul
+    %li=link_to "Add new", new_cv_manager_path
+  
   
 %h2 Users who can manage your CV
 -for manager in @cv_managers

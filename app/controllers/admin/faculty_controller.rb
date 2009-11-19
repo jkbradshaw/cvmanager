@@ -1,5 +1,7 @@
 class Admin::FacultyController < Admin::AdminController
 
+  before_filter :check_for_cancel, :only=>[:create, :update, :destroy]
+  
   def index
     @f = Faculty.find(:all)
     @faculty_members = @f.sort {|a,b| a.last_name.downcase <=> b.last_name.downcase}
@@ -18,7 +20,6 @@ class Admin::FacultyController < Admin::AdminController
   end
   
   def create
-    redirect_to admin_users_url if params[:cancel]
     @user = User.find(params[:user_id])
     @faculty = @user.build_faculty(params[:faculty])
     if @faculty.save
@@ -37,13 +38,26 @@ class Admin::FacultyController < Admin::AdminController
   end
   
   def update
-    redirect_to admin_faculty_url and return if params[:cancel]
     @faculty = Faculty.find(params[:id])
     if @faculty.update_attributes(params[:faculty])
-      flash[:notice] = "Successfully updated faculty."
-      redirect_to admin_faculty_url
+      respond_to do |format|
+        format.html do
+          flash[:notice] = "Successfully updated faculty."
+          redirect_to admin_faculty_url
+        end
+        
+        format.js {render :json=> {:success=>true, :new_value=>params[:faculty].values.first }.to_json }
+        
+      end
     else
-      render :action => 'edit'
+      respond_to do |format|
+        format.html do
+          render :action => 'edit'
+        end
+        
+        format.js {render :json=>{:success=>false, :msg=>@faculty.errors.full_messages}.to_json}
+        
+      end
     end
   end
   
@@ -52,11 +66,15 @@ class Admin::FacultyController < Admin::AdminController
   end
   
   def destroy
-    redirect_to admin_faculty_url and return if params[:cancel]
     @faculty = Faculty.find(params[:id])
     @faculty.destroy
     flash[:notice] = "Successfully removed #{@faculty.user.name}."
     redirect_to admin_faculty_url
   end
+  
+  private
+    def check_for_cancel
+      redirect_to admin_faculty_url and return if params[:cancel]
+    end
   
 end

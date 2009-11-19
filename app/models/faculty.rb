@@ -5,6 +5,9 @@ class Faculty < ActiveRecord::Base
   delegate :cv, :to=>:user
   delegate :name, :last_name, :first_name, :to=>:user
   delegate :presentations, :chapters, :books, :papers, :books_and_chapters, :to=>:cv
+  
+  validates_numericality_of :leadership
+  validate :leadership_range
 
   
   def points
@@ -103,5 +106,10 @@ class Faculty < ActiveRecord::Base
     end
   end
   
+  private
+    def leadership_range
+      errors.add(:leadership, 'Should be a number between 0 and 3') unless (leadership != nil and leadership >=0 and leadership <= 3)
+    end
+       
   
 end

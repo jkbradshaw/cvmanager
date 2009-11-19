@@ -15,13 +15,13 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :password, :password_confirmation
   
   def set_user_context (user)
-    session[:user_context] = user.id
+    session[:user_context] = user.id 
   end
   
   def user_context
     return false unless current_user
-    session[:user_context] ||= current_user.id
-    return User.exists?(session[:user_context]) ? User.find(session[:user_context]) : false
+    #session[:user_context] ||= current_user.id
+    return session[:user_context] && User.exists?(session[:user_context]) ? User.find(session[:user_context]) : false
   end
   
   def reset_user_context

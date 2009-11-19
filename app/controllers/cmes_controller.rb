@@ -10,8 +10,9 @@ class CmesController < ApplicationController
   
   def new
     @cme = @owner.cmes.new
-    @categories = CmeCategory.find(:all, :order => "category").map {|u| [u.category, u.id] }
-    @categories = @categories.sort {|a,b| a[0].downcase <=> b[0].downcase}
+    #@categories = CmeCategory.find(:all, :order => "category").map {|u| [u.category, u.id] }
+    #@categories = @categories.sort {|a,b| a[0].downcase <=> b[0].downcase}
+    @cme_categories = :cme_category_attributes
   end
   
   def create
@@ -27,8 +28,9 @@ class CmesController < ApplicationController
   
   def edit
     @cme = @owner.cmes.find(params[:id])
-    @categories = CmeCategory.find(:all, :order => "category").map {|u| [u.category, u.id] }
-    @categories = @categories.sort {|a,b| a[0].downcase <=> b[0].downcase}
+    @cme_categories = :cme_category
+    #@categories = CmeCategory.find(:all, :order => "category").map {|u| [u.category, u.id] }
+    #@categories = @categories.sort {|a,b| a[0].downcase <=> b[0].downcase}
   end
   
   def update

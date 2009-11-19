@@ -38,7 +38,7 @@ class Admin::UsersController < Admin::AdminController
   def permissions
     @site_permissions = User.site_permissions
     @user = User.find(params[:id])
-    @user_permissions = @user.roles.collect {|x| x.name unless x.authorizable_type.nil?}
+    @user_permissions = @user.role_objects.collect {|x| x.name unless x.authorizable_type.nil?}
     @user_permissions.reject! {|x| x.nil?}
   end
   

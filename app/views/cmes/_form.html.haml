@@ -2,6 +2,8 @@
   =f.begin_form
   =f.text_field :source
   =f.text_field :hours
-  =f.select(:cme_category_id, @categories)
+  /=f.select(:cme_category_id, @categories)
+  -f.fields_for :cme_category_attributes, :builder=>CvFormBuilder do |c|
+    =c.text_field :category, :label=>'CME Category'
   =f.text_field :received_date, :class=>'date date_select'
   =f.end_form

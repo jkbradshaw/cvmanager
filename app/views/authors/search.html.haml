@@ -1,0 +1,19 @@
+.span-60.last
+  -form_tag({:url => search_cv_authors_path(@cv)}, :method=>:get, :id=>'search_form') do
+    %fieldset.span-27
+      %legend Search
+      %label.span-9 First Name:
+      =text_field_tag 'search[first_name_like]'
+      %br
+      %label.span-9 Last Name: 
+      =text_field_tag 'search[last_name_like]'
+      %br
+      .prepend-10=fg_submit_button 'search'
+
+#search_results.span-30.prepend-1
+  =render :partial=>'search_results'
+  
+#author_preview.span-30.prepend-2.last
+
+
+  

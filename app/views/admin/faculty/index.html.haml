@@ -1,17 +1,45 @@
+#error_messages.error.hidden
 %h1.content-title Faculty Members
-%table
+%table.arvu#faculty
+  %tr
+    %th Name
+    %th Section
+    %th Start date
+    %th Clin RVU
+    %th Res
+    %th MS
+    %th Leadership
   -for member in @faculty_members
     %tr
       %td=h member.name
       %td=h member.section.name
       %td=h member.start_date
-      %td=h member.clinical_rvu
-      %td=h member.resident_teaching
-      %td=h member.medstudent_teaching
-      %td=h member.leadership
+      %td.editable
+        %span.original=h member.clinical_rvu
+        %span.edit.hidden
+          -form_tag({:controller=>'admin/faculty', :action=>'update', :id=>member.id }, :id=>"membership_clinical_rvu_form_#{member.id}", :class=>'skip_validation' ) do
+            =text_field_tag 'faculty[clinical_rvu]', member.clinical_rvu, {:size=>4, :id=>"membership_clinical_rvu_#{member.id}", :class=>'in_place_edit'}
+            
+      %td.editable
+        %span.original=h member.resident_teaching
+        %span.edit.hidden
+          -form_tag({:controller=>'admin/faculty', :action=>'update', :id=>member.id }, :id=>"membership_resident_teaching_form_#{member.id}", :class=>'skip_validation' ) do
+            =text_field_tag 'faculty[resident_teaching]', member.resident_teaching, {:size=>3, :id=>"membership_resident_teaching_#{member.id}", :class=>'in_place_edit'}
+            
+      %td.editable
+        %span.original=h member.medstudent_teaching
+        %span.edit.hidden
+          -form_tag({:controller=>'admin/faculty', :action=>'update', :id=>member.id }, :id=>"membership_medstudent_teaching_form_#{member.id}", :class=>'skip_validation' ) do
+            =text_field_tag 'faculty[medstudent_teaching]', member.medstudent_teaching, {:size=>3, :id=>"membership_medstudent_teaching_#{member.id}", :class=>'in_place_edit'}        
+      
+      %td.span-1.editable
+        %span.original=h member.leadership
+        %span.edit.hidden
+          -form_tag({:controller=>'admin/faculty', :action=>'update', :id=>member.id }, :id=>"membership_leadership_form_#{member.id}", :class=>'skip_validation' ) do
+            =text_field_tag 'faculty[leadership]', member.leadership, {:size=>2, :id=>"membership_leadership_#{member.id}", :class=>'in_place_edit'}
       %td
         .links.clearfix
-          =link_to 'edit', edit_admin_faculty_instance_path(member)
-          |
-          =link_to 'remove from faculty', delete_admin_faculty_instance_path(member)
+          %ul
+            /%li=link_to 'edit', edit_admin_faculty_instance_path(member)
+            %li.first= link_to 'remove', delete_admin_faculty_instance_path(member)
 
