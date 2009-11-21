@@ -40,31 +40,34 @@
 		$(document).bind('keydown',function(e) {
 			var code = (e.keyCode ? e.keyCode : e.which);
 			$selected = $table.data('selected');
-			switch(code) {
-				case 13: 	
-					e.preventDefault();
-					edit($table.data('selected'));
-					break;
+			if ($selected)
+			{
+				switch(code) {
+					case 13: 	
+						e.preventDefault();
+						edit($table.data('selected'));
+						break;
 						
-				case 38: 	
-					e.preventDefault(); 
-					nextUp($selected).focus();
-					break;
+					case 38: 	
+						e.preventDefault(); 
+						nextUp($selected).focus();
+						break;
 						
-				case 40: 	
-					e.preventDefault();
-					nextDown($selected).focus();
-					break;
+					case 40: 	
+						e.preventDefault();
+						nextDown($selected).focus();
+						break;
 						
-				case 37: 	
-					e.preventDefault();
-					nextLeft($selected).focus();
-					break;
+					case 37: 	
+						e.preventDefault();
+						nextLeft($selected).focus();
+						break;
 						
-				case 39:
-				 	e.preventDefault();
-					nextRight($selected).focus();
-					break;
+					case 39:
+					 	e.preventDefault();
+						nextRight($selected).focus();
+						break;
+				}
 			}
 		});
 		

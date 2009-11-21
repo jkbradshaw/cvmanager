@@ -11,12 +11,14 @@
   =stylesheet_link_tag('application')
   /[if IE]
     =stylesheet_link_tag('ie')
+    
   =javascript_include_tag "jquery/jquery-1.3.2.min", "jquery/jquery-ui-1.7.2.min"
   /=javascript_include_tag "jquery/jquery-1.3.2"
-  /=javascript_include_tag "jquery/autocomplete", "jquery-validate/jquery.validate", "custom-validation"
   =javascript_include_tag "jquery/autocomplete.min", "jquery-validate/jquery.validate.min", "custom-validation.min"
-  /=javascript_include_tag "inPlaceEdit", 'application'
+  /=javascript_include_tag "jquery/autocomplete", "jquery-validate/jquery.validate", "custom-validation"
   =javascript_include_tag "inPlaceEdit.min", 'application.min'
+  /=javascript_include_tag "inPlaceEdit", 'application'
+  
   =yield(:head)
   %title=yield(:title) || "CV Manager"
   
