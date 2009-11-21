@@ -2,7 +2,7 @@
   =f.begin_form
   =f.text_field :level, :label=>'Training level', :class=>'required alpha'
   =f.text_field :specialty, :class=>'required alpha'
-  =f.text_field :year, :size=>5, :class=>'required year'
+  =f.text_field :year, :size=>5, :class=>'required year', :label=>'Year completed'
   =f.text_area :description, :size=>'40x3'
   - f.fields_for @institution_fields do |i|
     %fieldset

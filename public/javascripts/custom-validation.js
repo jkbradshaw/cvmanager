@@ -36,7 +36,7 @@ jQuery.validator.addMethod('author_list', function(list, element) {
 }, "Author list should be first name last name, separated by commas, ie John Smith, George Washington");
 
 jQuery.validator.addMethod("alpha", function(value, element) {
-	return this.optional(element) || value.match(/^\w\s\D$/);
+	return this.optional(element) || value.match(/^[A-Za-z, -]+$/);
 }, "Letters, spaces or underscores only please");
 
 jQuery.validator.addMethod("isbn", function(value,element) {

@@ -1,31 +1,10 @@
-- form_for (@user, :url=> user_path) do |f|
-  =f.error_messages
-  %p
-    =f.label :first_name
-    %br
-    =f.text_field :first_name
-  %p
-    =f.label :last_name
-    %br
-    =f.text_field :last_name
-  %p
-    =f.label :username
-    %br
-    =f.text_field :username
-  %p
-    =f.label :email
-    %br
-    =f.text_field :email
-  %p
-    =f.label :password
-    %br
-    =f.password_field :password
-  %p
-    =f.label :password_confirmation
-    %br
-    =f.password_field :password_confirmation
-  %hr
-  %p
-    =fg_submit_button "Submit"
-    =fg_cancel_button "Cancel"
+- form_for (@user, :url=> user_path), :builder=>CvFormBuilder do |f|
+  =f.begin_form
+  =f.text_field :first_name, :class=>'required alpha'
+  =f.text_field :last_name, :class=>'required alpha'
+  =f.text_field :username, :class=>'required alpha'
+  =f.text_field :email, :class=>'required emaila'
+  =f.password_field :password
+  =f.password_field :password_confirmation
+  =f.end_form
     
